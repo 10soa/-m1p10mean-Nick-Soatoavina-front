@@ -1,5 +1,6 @@
 import {
   cibCcAmex,
+  cilCarAlt,
   cibCcApplePay,
   cibCcMastercard,
   cibCcPaypal,
@@ -182,6 +183,7 @@ export const iconSubset = {
   cilUserFemale,
   cilUserFollow,
   cilUserUnfollow,
+  cilCarAlt
 };
 
 export enum IconSubset {
@@ -263,6 +265,7 @@ export enum IconSubset {
   cilShareBoxed = 'cilShareBoxed',
   cilSpeech = 'cilSpeech',
   cilSpeedometer = 'cilSpeedometer',
+  cilCarAlt = 'cilCarAlt',
   cilSpreadsheet = 'cilSpreadsheet',
   cilStar = 'cilStar',
   cilSun = 'cilSun',
