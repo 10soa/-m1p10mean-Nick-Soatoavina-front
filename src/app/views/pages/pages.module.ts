@@ -6,16 +6,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
-import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
+import { ButtonModule, CalloutModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VerificationComponent } from './verificationInscription/verification.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
     Page404Component,
-    Page500Component
+    Page500Component,
+    VerificationComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,10 @@ import { IconModule } from '@coreui/icons-angular';
     ButtonModule,
     GridModule,
     IconModule,
-    FormModule
+    FormModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CalloutModule
   ]
 })
 export class PagesModule {

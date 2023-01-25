@@ -4,50 +4,71 @@
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
           <c-card-body class="p-4">
-            <form cForm>
+            <form  [formGroup]="form" cForm>
               <h1>Inscription</h1>
               <p class="text-medium-emphasis">Créez votre compte</p>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Nom" />
+                <input autoComplete="nom" cFormControl placeholder="Nom" type="text" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }" />
+                <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+                  <div *ngIf="f['nom'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Prenom" />
+                <input autoComplete="prenom" cFormControl placeholder="Prenom" type="text" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f['prenom'].errors }"/>
+                <div *ngIf="submitted && f['prenom'].errors" class="invalid-feedback">
+                  <div *ngIf="f['prenom'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="Nom d'utilisateur" />
+                <input autoComplete="utilisateur" cFormControl placeholder="Nom d'utilisateur" type="text" formControlName="utilisateur" [ngClass]="{ 'is-invalid': submitted && f['utilisateur'].errors }"/>
+                <div *ngIf="submitted && f['utilisateur'].errors" class="invalid-feedback">
+                  <div *ngIf="f['utilisateur'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText> <svg cIcon name="cilPhone"></svg></span>
-                <input autoComplete="email" cFormControl placeholder="Contact" />
+                <input autoComplete="contact" cFormControl placeholder="Contact" type="text" formControlName="contact" [ngClass]="{ 'is-invalid': submitted && f['contact'].errors }"/>
+                <div *ngIf="submitted && f['contact'].errors" class="invalid-feedback">
+                  <div *ngIf="f['contact'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>@</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
+                <input autoComplete="email" cFormControl placeholder="Email" type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"/>
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText> <svg cIcon name="cilHome"></svg></span>
-                <input autoComplete="email" cFormControl placeholder="Adresse" />
+                <input autoComplete="adresse" cFormControl placeholder="Adresse" type="text" formControlName="adresse" [ngClass]="{ 'is-invalid': submitted && f['adresse'].errors }"/>
+                <div *ngIf="submitted && f['adresse'].errors" class="invalid-feedback">
+                  <div *ngIf="f['adresse'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="Mot de passe" type="password" />
+                <input autoComplete="password" cFormControl placeholder="Mot de passe" type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"/>
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                  <div *ngIf="f['password'].errors['required']">...champ manquant!</div>
+                </div>
               </c-input-group>
               <div class="d-grid">
-                <button cButton color="success">S'inscrire</button>
+                <button cButton color="success" (click) ="inscription()">S'inscrire</button>
               </div>
               <div class="d-grid">
-              <button cButton class="px-0" color="link">
+              <button cButton class="px-0" color="link" routerLink="/login">
                 Avez-vous déjà un compte?
               </button>
               </div>
