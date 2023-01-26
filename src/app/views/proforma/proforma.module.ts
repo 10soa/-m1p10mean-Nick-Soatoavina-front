@@ -35,6 +35,8 @@ import { FormsRoutingModule } from '../forms/forms-routing.module'
     ReactiveFormsModule,
     IconModule,
     ModalModule,
+    AlertModule,
+    CardModule,
   ]
 })
 export class ProformaModule {

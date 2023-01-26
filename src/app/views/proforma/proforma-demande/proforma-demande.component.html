@@ -3,7 +3,7 @@
     <c-card class="mb-4">
       <c-card-header ngPreserveWhitespaces>
         <strong>Demande de proforma</strong>
-        <button cButton type="submit" style="float: right">
+        <button cButton type="submit" style="float: right" (click)="demandeProforma()">
           Envoyer la demande
         </button>
       </c-card-header>
@@ -30,27 +30,61 @@
           </c-col>
           <c-col md="12">
             <label cLabel for="inputAddress2">Reparation </label>
+            <c-row>
+            <c-col *ngFor="let reparation of reparations; index as i" lg="4">
+              <c-card *ngIf="reparation.reparation !== ''" cBorder="{top: {color: 'dark', width: 3}}" textColor="dark" class="mb-3">
+                <c-card-header>Reparation</c-card-header>
+                <c-card-body>
+                  <h5 cCardTitle>{{reparation.reparation}}</h5>
+                  <p cCardText>
+                    {{reparation.montant}} AR ( Prix de base )
+                  </p>
+                  <button color="dark" (click)="supprimerReparation(i)" cButton>Supprimer cette reparation</button>
+                </c-card-body>
+              </c-card>
+            </c-col> </c-row> <div class="d-grid gap-2">
+            
+            <button
+      cButton
+      (click)="toggleLiveDemo()"
+      color="secondary"
+      [disabled]="rep"
+    >
+      <svg cIcon name="cilPlus"></svg>
+    </button></div>
             <ng-container *ngTemplateOutlet="verticallyCentered"></ng-container>
           </c-col>
-
-          <c-col xs="12"> </c-col>
+          <c-col xs="12">  <c-alert
+            #alertWithButtonCloseTemplate="cAlert"
+            [dismissible]="dismissible"
+            [visible]="visibleError"
+            (visibleChange)="onAlertVisibleChange($event)"
+            color="danger"
+            fade
+            variant="solid"
+          >
+            <ng-template
+              [ngIf]="alertWithButtonCloseTemplate.dismissible"
+              cTemplateId="alertButtonCloseTemplate"
+            >
+              <button
+                (click)="visibleError = false"
+                cButtonClose
+                white
+              ></button>
+            </ng-template>
+            {{ error }}
+          </c-alert> </c-col>
         </form>
       </c-card-body>
     </c-card>
   </c-col>
 </c-row>
+<c-row>
+  
+</c-row>
 <ng-template #verticallyCentered>
-  <div class="d-grid gap-2">
-    <button
-      [cModalToggle]="verticallyCenteredModal.id"
-      cButton
-      (click)="toggleLiveDemo()"
-      color="secondary"
-    >
-      <svg cIcon name="cilPlus"></svg>
-    </button>
-  </div>
-  <!-- <c-modal id="liveDemoModal" [visible]="liveDemoVisible" (visibleChange)="handleLiveDemoChange($event)"></c-modal> -->
+
   <c-modal
     #verticallyCenteredModal
     alignment="center"
@@ -63,14 +97,14 @@
       <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-      <label cLabel for="inputState">State</label>
-      <select cSelect id="inputState">
+      <label cLabel for="inputState">Reparation</label>
+      <select cSelect id="inputState"  #rep (change)="repSelected(rep.value)">
         <option>...</option>
         <option
-          *ngFor="let voiture of listeVoiture; let i = index"
+          *ngFor="let rep of listeReparation; let i = index"
           value="{{ i }}"
         >
-          {{ voiture.numero }}
+          {{ rep.reparation}}
         </option>
       </select>
     </c-modal-body>
@@ -82,7 +116,7 @@
       >
         Fermer
       </button>
-      <button cButton color="primary">Ajouter</button>
+      <button cButton color="primary" (click)="addReparation()">Ajouter</button>
     </c-modal-footer>
   </c-modal>
 </ng-template>
