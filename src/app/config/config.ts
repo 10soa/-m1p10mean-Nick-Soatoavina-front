@@ -1,1 +1,0 @@
-export const url = "http://localhost:2002/Mean_projet/";

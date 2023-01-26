@@ -2,12 +2,12 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
+    name: 'Reparation voiture',
     url: '/dashboard',
-    iconComponent: { name: 'cil-speedometer' },
+    iconComponent: { name: 'cil-car-alt'},
     badge: {
-      color: 'info',
-      text: 'NEW'
+      color: 'danger',
+      text: 'new'
     }
   },
   {
