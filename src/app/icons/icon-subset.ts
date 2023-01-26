@@ -90,10 +90,12 @@ import {
   cilUserFollow,
   cilUserUnfollow,
   cilPhone,
+  cilPlus,
 } from '@coreui/icons';
 
 export const iconSubset = {
   cibCcAmex,
+  cilPlus,
   cibCcApplePay,
   cibCcMastercard,
   cibCcPaypal,
@@ -204,6 +206,7 @@ export enum IconSubset {
   cifIn = 'cifIn',
   cifPl = 'cifPl',
   cifUs = 'cifUs',
+  cilPlus = 'cilPlus',
   cilAlignCenter = 'cilAlignCenter',
   cilAlignLeft = 'cilAlignLeft',
   cilAlignRight = 'cilAlignRight',
