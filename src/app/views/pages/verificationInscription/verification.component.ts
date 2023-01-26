@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as internal from 'stream';
+import { RegisterComponent } from '../register/register.component';
 
 
 @Component({
@@ -15,14 +16,22 @@ export class VerificationComponent implements OnInit{
   nom !: string;
   prenom!: string;
   mail!: string;
-  
+  client!: any;
+
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
+
+  clientInscription(nom:string,prenom:string,mail:string){
+    var url="http://localhost/Mean_projet/Client/clientInscription/"+nom+"/"+prenom+"/"+mail;
+    return this.http.get(url);
+    
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.nom=params['nom'];
       this.prenom=params['prenom'];
       this.mail=params['mail'];
-     // console.log(this.nom,this.prenom,this.mail);
+      //console.log("lc"+localStorage.getItem("utilisateur"));
       this.http.post('http://localhost/Mean_projet/Client/validationCompte',
       { 
         nom: this.nom,
@@ -35,7 +44,17 @@ export class VerificationComponent implements OnInit{
     }, error => {
       console.log(error.error.message)
     })
-    });    
+    });  
+    this.clientInscription(this.nom,this.prenom,this.mail).subscribe(
+      (response)=>{
+        this.client=response;
+        localStorage.setItem("type_user","Client");
+        localStorage.setItem("utilisateur",this.client.data[0].nom+" "+this.client.data[0].mail);
+      },
+      (err)=>{console.log(err);}
+    ); 
+    console.log(localStorage.getItem("utilisateur"));
   }
+  /*localStorage.removeItem("utilisateur");
+  localStorage.removeItem("type_user");*/
 }
-

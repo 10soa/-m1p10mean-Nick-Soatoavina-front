@@ -48,7 +48,7 @@ export class RegisterComponent  implements OnInit {
       return;
     }
     this.loading = true;
-
+    
     this.http.post('http://localhost/Mean_projet/Client/inscriptionClient',
     { 
       nom: this.f['nom'].value,
@@ -61,7 +61,6 @@ export class RegisterComponent  implements OnInit {
     }).subscribe((result: any) => {
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
       this.router.navigateByUrl(returnUrl);
-  
   }, error => {
     console.log(error.error.message)
   })
