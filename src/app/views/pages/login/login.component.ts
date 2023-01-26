@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import api from 'src/app/const/api';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,7 @@ export class LoginComponent  implements OnInit {
     this.submitted = true;
     if(  this.f['username'].value !== '' &&  this.f['password'].value !==''){
       this.loading = true;
-    this.http.post('http://localhost/Mean_projet/login',{ nom: this.f['username'].value, mdp:this.f['password'].value}).subscribe((result: any) => {
+    this.http.post(api('login'),{ nom: this.f['username'].value, mdp:this.f['password'].value}).subscribe((result: any) => {
     localStorage.setItem('type_user',result.type_user);
     localStorage.setItem('utilisateur',JSON.stringify(result.utilisateur));
     this.router.navigateByUrl('/dashboard');
