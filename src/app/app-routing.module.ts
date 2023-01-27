@@ -7,6 +7,7 @@ import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { VerificationComponent } from './views/pages/verificationInscription/verification.component';
+import {VoitureDeposerComponent} from './views/depot/voiture-deposer/voiture-deposer.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
+      },
+      {
+        path: 'listeVoitureDeposer',
+        loadChildren: () =>
+          import('./views/depot/depot.module').then((m) => m.DepotModule)
       },
       {
         path: 'pages',

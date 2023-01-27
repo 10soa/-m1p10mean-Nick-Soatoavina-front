@@ -238,6 +238,10 @@ export const navItems: INavData[] = [
       {
         name: 'Error 500',
         url: '/500'
+      },
+      {
+        name: 'Test',
+        url: '/listeVoitureDeposer/:off/:lim'
       }
     ]
   },
