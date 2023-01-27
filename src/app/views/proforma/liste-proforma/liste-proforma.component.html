@@ -1,0 +1,95 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header>
+      <strong> Liste des proforma à valider </strong>
+    </c-card-header>
+    <c-card-body>
+      <table cTable>
+        <thead cTableColor="dark">
+          <tr>
+            <th scope="col">Client</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Voiture</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pro of demandeProforma; index as i">
+            <th>{{ pro.client[0].nom }} {{ pro.client[0].prenom }}</th>
+            <td>{{ pro.marque }}</td>
+            <td>{{ pro.modele }}</td>
+            <td>{{ pro.numero }}</td>
+            <td>{{ pro.type_voiture }}</td>
+            <td>
+              <button cButton (click)="toggleLiveDemo(i)" color="success">
+                <svg cIcon name="cilCheck"></svg> Valider
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <c-pagination aria-label="Page navigation example">
+        <c-page-item
+          *ngFor="let pagination of paginations; index as i"
+          [active]="comparaison(page, i)"
+        >
+          <a
+            class="cursor"
+            (click)="getDemandeProforma(i, pageNumber)"
+            cPageLink
+            >{{ i + 1 }}</a
+          >
+        </c-page-item>
+      </c-pagination>
+    </c-card-body>
+  </c-card>
+</c-col>
+
+<c-modal
+  #verticallyCenteredModal
+  alignment="center"
+  id="verticallyCenteredModal"
+  [visible]="liveDemoVisible"
+  (visibleChange)="handleLiveDemoChange($event)"
+  size="lg"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Les reparations</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <table cTable>
+      <thead cTableColor="dark">
+        <tr>
+          <th scope="col">Reparation</th>
+          <th scope="col">Prix ( AR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rep of reparationSelectioned; index as ii">
+          <td>{{ rep.reparation }}</td>
+          <td>
+            <input
+              value="{{ reparationSelectioned[ii].prix }}"
+              type="number"
+              min="0,0"
+              [(ngModel)]="reparationSelectioned[ii].prix"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      cButton
+      color="secondary"
+      [cModalToggle]="verticallyCenteredModal.id"
+    >
+      Fermer
+    </button>
+    <button cButton color="success" [disabled]="loading" (click)="validationProforma()">  <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span> Valider</button>
+  </c-modal-footer>
+</c-modal>
