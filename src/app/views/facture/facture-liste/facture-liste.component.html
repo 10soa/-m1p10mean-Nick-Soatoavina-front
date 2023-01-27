@@ -1,0 +1,138 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header style="text-align: center">
+      <h2>Liste de  vos factures</h2>
+    </c-card-header>
+    <c-card-body>
+      <table cTable>
+        <thead cTableColor="dark">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Voiture</th>
+            <th scope="col">Date de deposition</th>
+            <th scope="col">Etat de paiement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let facture of listeFacture; index as i">
+            <th>
+              <a
+                class="cursor"
+                (click)="
+                  factureDetails(
+                    facture._id,
+                    facture.reparation.date_deposition
+                  )
+                "
+                >{{ facture._id }}</a
+              >
+            </th>
+            <td>{{ facture.marque }}</td>
+            <td>{{ facture.modele }}</td>
+            <td>{{ facture.numero }}</td>
+            <td>{{ facture.type_voiture }}</td>
+            <td>{{ facture.reparation.date_deposition.replace("T", " ") }}</td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              <c-badge class="me-1" color="danger">Non payé</c-badge>
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye ===
+                0
+              "
+            >
+              <c-badge class="me-1" color="success">Payé</c-badge>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <c-pagination aria-label="Page navigation example">
+        <c-page-item
+          *ngFor="let pagination of paginations; index as i"
+          [active]="comparaison(page, i)"
+        >
+          <a
+            class="cursor"
+            (click)="getListefacture(i, pageNumber)"
+            cPageLink
+            >{{ i + 1 }}</a
+          >
+        </c-page-item>
+      </c-pagination>
+    </c-card-body>
+  </c-card>
+</c-col>
+
+<c-modal
+  #verticallyCenteredModal
+  alignment="center"
+  id="verticallyCenteredModal"
+  [visible]="liveDemoVisible"
+  (visibleChange)="handleLiveDemoChange($event)"
+  size="lg"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Details de la facture</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+     <h1 style="text-align: center;"> <span style="text-decoration: underline;">Facture</span> : {{facture.marque}} {{facture.modele}} {{facture.numero}}</h1> 
+     <br>
+     <div style="text-align: center;font-size:large">
+     <p> <strong> Date de deposition </strong>: {{facture.reparation.date_deposition.replace('T',' ')}}</p>
+     <p><strong> Date de reception </strong>: {{facture.reparation.date_reception.replace('T',' ')}}</p>
+     <p *ngIf="facture.reparation.date_recuperation"> <strong>Date de recupération </strong>:{{facture.reparation.date_recuperation.replace('T',' ')}}</p></div>
+    <!-- <h4 style="text-align: center;">Vos réparatons:</h4> -->
+    <table cTable size="sm">
+      <thead cTableColor="dark">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Reparation</th>
+          <th scope="col">Prix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rep of liste_reparation; index as i">
+          <td scope="col"></td>
+          <td>{{ rep.reparation }}</td>
+          <td>{{ rep.prix }} AR</td>
+        </tr>
+        <tr>
+          <td  style="text-decoration: underline;">Total:</td>
+          <td></td>
+          <td > <strong>{{ facture.reparation.montant_total }} AR </strong></td>
+        </tr>
+        <tr>
+          <td  style="text-decoration: underline;">Montant payé:</td>
+          <td></td>
+          <td><strong>{{ facture.reparation.montant_paye }} AR  </strong> </td>
+        </tr>
+        <tr >
+          <td  style="text-decoration: underline;">Reste à payer:</td>
+          <td></td>
+          <td *ngIf="facture.reparation.montant_total - facture.reparation.montant_paye === 0" style="color: rgb(46, 184, 92);"><strong>{{ facture.reparation.montant_total - facture.reparation.montant_paye }} AR </strong></td>
+          <td *ngIf="facture.reparation.montant_total - facture.reparation.montant_paye !== 0"  style="color: rgb(229, 83, 83);"><strong>{{ facture.reparation.montant_total - facture.reparation.montant_paye }} AR </strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      cButton
+      color="secondary"
+      [cModalToggle]="verticallyCenteredModal.id"
+    >
+      Fermer
+    </button>
+  </c-modal-footer>
+</c-modal>
