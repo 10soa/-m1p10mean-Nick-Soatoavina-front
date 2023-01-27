@@ -31,6 +31,11 @@ const routes: Routes = [
           import('./views/proforma/proforma.module').then((m) => m.ProformaModule)
       },
       {
+        path: 'facture',
+        loadChildren: () =>
+          import('./views/facture/facture.module').then((m) => m.FactureModule)
+      },
+      {
         path: 'theme',
         loadChildren: () =>
           import('./views/theme/theme.module').then((m) => m.ThemeModule)

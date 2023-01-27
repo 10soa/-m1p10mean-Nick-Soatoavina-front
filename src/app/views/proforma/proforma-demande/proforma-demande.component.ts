@@ -76,7 +76,7 @@ export class ProformaDemandeComponent implements OnInit {
     if(this.reparations.length > 0 && this.voiture.marque!==''){
       if(this.reparations[0].reparation!==''){
         this.http.post(api("Proforma/demande"),{ client_id:this.client.client_id , marque : this.voiture.marque , numero : this.voiture.numero , modele : this.voiture.modele , reparation : this.reparations}).subscribe((res) => {
-          this.router.navigateByUrl('/dashboard');},
+          this.router.navigateByUrl('/proforma/demande');},
           error => {})
       }
       else {
