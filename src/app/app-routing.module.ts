@@ -87,6 +87,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      {
+        path: 'voiture',
+        loadChildren: () =>
+          import('./views/voiture/voiture.module').then((m) => m.VoitureModule)
+      },
     ]
   },
   {

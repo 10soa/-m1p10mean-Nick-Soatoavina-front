@@ -98,11 +98,11 @@ export class FactureImpayeComponent {
     this.visibleError = false;
   }
 
-   pagePaiement(i:number,diff:number){
+  pagePaiement(i:number,diff:number){
     this.index = i;
     this.diff = diff;
     this.facture = this.listeFacture[i];
     this.liste_reparation = this.listeFacture[i].reparation.liste_reparation;
     this.liveDemoVisible = true;
-   }
+  }
 }
