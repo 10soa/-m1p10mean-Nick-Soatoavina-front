@@ -28,7 +28,7 @@ export class ProformaDemandeComponent implements OnInit {
   public client = JSON.parse(localStorage.getItem('utilisateur') || '{}');
   public listeReparation = [{reparation:'',montant:0}];
   public reparations  = [{reparation : '',prix:0}];
-  // public client : Object = JSON.parse(localStorage.getItem('utilisateur'));
+  
   constructor(private http: HttpClient,private formBuilder: FormBuilder,private router: Router) { }
 
   ngOnInit() {

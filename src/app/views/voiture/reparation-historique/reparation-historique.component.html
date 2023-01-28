@@ -1,53 +1,74 @@
-<c-accordion [alwaysOpen]="true">
-    <c-accordion-item #item0="cAccordionItem" [visible]="false">
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<div *ngIf="ready">
+  <c-accordion [alwaysOpen]="true">
+    <c-accordion-item
+      *ngFor="let voiture of listeVoiture; index as i"
+      #item0="cAccordionItem"
+      [visible]="false"
+    >
       <ng-template cTemplateId="accordionHeaderTemplate">
-        <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
-          Accordion item #0
+        <button
+          (click)="item0.toggleItem()"
+          [collapsed]="!item0.visible"
+          cAccordionButton
+        >
+          <span style="padding-right: 1vw">
+            <svg cIcon name="cilCarAlt" size="3xl"></svg>
+          </span>
+          <strong>
+            {{ voiture.marque }} {{ voiture.modele }} immatriculé
+            {{ voiture.numero }}
+          </strong>
         </button>
       </ng-template>
       <ng-template cTemplateId="accordionBodyTemplate">
         <div class="accordion-body">
-          <strong>This is the first item's accordion body.</strong> It is hidden by default,
-          until the collapse plugin adds the appropriate classes that we use to style each
-          element. These classes control the overall appearance, as well as the showing and
-          hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-          our default variables. It's also worth noting that just about any HTML can go within
-          the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </ng-template>
-    </c-accordion-item>
-    <c-accordion-item #item1="cAccordionItem" [visible]="false">
-      <ng-template cTemplateId="accordionHeaderTemplate">
-        <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
-          Accordion item #1
-        </button>
-      </ng-template>
-      <ng-template cTemplateId="accordionBodyTemplate">
-        <div class="accordion-body">
-          <strong>This is the second item's accordion body.</strong> It is hidden by default,
-          until the collapse plugin adds the appropriate classes that we use to style each
-          element. These classes control the overall appearance, as well as the showing and
-          hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-          our default variables. It's also worth noting that just about any HTML can go within
-          the <code>.accordion-body</code>, though the transition does limit overflow.
-        </div>
-      </ng-template>
-    </c-accordion-item>
-    <c-accordion-item #item2="cAccordionItem" [visible]="false">
-      <ng-template cTemplateId="accordionHeaderTemplate">
-        <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
-          Accordion item #2
-        </button>
-      </ng-template>
-      <ng-template cTemplateId="accordionBodyTemplate">
-        <div class="accordion-body">
-          <strong>This is the third item's accordion body.</strong> It is hidden by default,
-          until the collapse plugin adds the appropriate classes that we use to style each
-          element. These classes control the overall appearance, as well as the showing and
-          hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-          our default variables. It's also worth noting that just about any HTML can go within
-          the <code>.accordion-body</code>, though the transition does limit overflow.
+          <table cTable>
+            <thead>
+              <tr style="text-align: center">
+                <th scope="row"></th>
+                <th scope="col">Date de deposition</th>
+                <th scope="col">Date de reception</th>
+                <th scope="col">Date de recupération</th>
+                <th scope="col">Liste des réparations</th>
+                <th scope="col">Montant total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let rep of voiture.reparation; index as ii"
+                style="text-align: center"
+              >
+                <th scope="row">{{ii+1}}</th>
+                <th>
+                  {{ rep.date_deposition.replace("T", " ").replace("Z", "") }}
+                </th>
+                <td *ngIf="rep.date_reception">
+                  {{ rep.date_reception.replace("T", " ").replace("Z", "") }}
+                </td>
+                <td *ngIf="!rep.date_reception">--</td>
+                <td *ngIf="rep.date_recuperation">
+                  {{ rep.date_recuperation.replace("T", " ").replace("Z", "") }}
+                </td>
+                <td *ngIf="!rep.date_recuperation">--</td>
+                <td>
+                  <ul>
+                    <li
+                      *ngFor="let repa of rep.liste_reparation; index as iii"
+                      class="rep"
+                    >
+                      {{ repa.reparation }}
+                    </li>
+                  </ul>
+                </td>
+                <td>{{ rep.montant_total }} AR</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </ng-template>
     </c-accordion-item>
   </c-accordion>
+</div>
