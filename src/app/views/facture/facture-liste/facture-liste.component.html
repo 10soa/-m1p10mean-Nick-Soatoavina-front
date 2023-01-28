@@ -1,7 +1,7 @@
 <c-col xs="12">
   <c-card class="mb-4">
     <c-card-header style="text-align: center">
-      <h2>Liste de  vos factures</h2>
+      <h2>Liste de vos factures</h2>
     </c-card-header>
     <c-card-body>
       <table cTable>
@@ -86,12 +86,26 @@
     <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-     <h1 style="text-align: center;"> <span style="text-decoration: underline;">Facture</span> : {{facture.marque}} {{facture.modele}} {{facture.numero}}</h1> 
-     <br>
-     <div style="text-align: center;font-size:large">
-     <p> <strong> Date de deposition </strong>: {{facture.reparation.date_deposition.replace('T',' ')}}</p>
-     <p><strong> Date de reception </strong>: {{facture.reparation.date_reception.replace('T',' ')}}</p>
-     <p *ngIf="facture.reparation.date_recuperation"> <strong>Date de recupération </strong>:{{facture.reparation.date_recuperation.replace('T',' ')}}</p></div>
+    <h1 style="text-align: center">
+      <span style="text-decoration: underline">Facture</span> :
+      {{ facture.marque }} {{ facture.modele }} {{ facture.numero }}
+    </h1>
+    <br />
+    <div style="text-align: center; font-size: large">
+      <p>
+        <strong> Date de deposition </strong>:
+        {{ facture.reparation.date_deposition.replace("T", " ") }}
+      </p>
+      <p>
+        <strong> Date de reception </strong>:
+        {{ facture.reparation.date_reception.replace("T", " ") }}
+      </p>
+      <p *ngIf="facture.reparation.date_recuperation">
+        <strong>Date de recupération </strong>:{{
+          facture.reparation.date_recuperation.replace("T", " ")
+        }}
+      </p>
+    </div>
     <!-- <h4 style="text-align: center;">Vos réparatons:</h4> -->
     <table cTable size="sm">
       <thead cTableColor="dark">
@@ -108,20 +122,54 @@
           <td>{{ rep.prix }} AR</td>
         </tr>
         <tr>
-          <td  style="text-decoration: underline;">Total:</td>
+          <td style="text-decoration: underline">Total:</td>
           <td></td>
-          <td > <strong>{{ facture.reparation.montant_total }} AR </strong></td>
+          <td>
+            <strong>{{ facture.reparation.montant_total }} AR </strong>
+          </td>
         </tr>
         <tr>
-          <td  style="text-decoration: underline;">Montant payé:</td>
+          <td style="text-decoration: underline">Montant payé:</td>
           <td></td>
-          <td><strong>{{ facture.reparation.montant_paye }} AR  </strong> </td>
+          <td>
+            <strong>{{ facture.reparation.montant_paye }} AR </strong>
+          </td>
         </tr>
-        <tr >
-          <td  style="text-decoration: underline;">Reste à payer:</td>
+        <tr>
+          <td style="text-decoration: underline">Reste à payer:</td>
           <td></td>
-          <td *ngIf="facture.reparation.montant_total - facture.reparation.montant_paye === 0" style="color: rgb(46, 184, 92);"><strong>{{ facture.reparation.montant_total - facture.reparation.montant_paye }} AR </strong></td>
-          <td *ngIf="facture.reparation.montant_total - facture.reparation.montant_paye !== 0"  style="color: rgb(229, 83, 83);"><strong>{{ facture.reparation.montant_total - facture.reparation.montant_paye }} AR </strong></td>
+          <td
+            *ngIf="
+              facture.reparation.montant_total -
+                facture.reparation.montant_paye ===
+              0
+            "
+            style="color: rgb(46, 184, 92)"
+          >
+            <strong
+              >{{
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye
+              }}
+              AR
+            </strong>
+          </td>
+          <td
+            *ngIf="
+              facture.reparation.montant_total -
+                facture.reparation.montant_paye !==
+              0
+            "
+            style="color: rgb(229, 83, 83)"
+          >
+            <strong
+              >{{
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye
+              }}
+              AR
+            </strong>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -134,5 +182,6 @@
     >
       Fermer
     </button>
+    <button *ngIf="facture.reparation.montant_total-facture.reparation.montant_paye !== 0" cButton color="primary" (click)="paiement(facture.reparation.montant_total-facture.reparation.montant_paye)">Payer la facture</button>
   </c-modal-footer>
 </c-modal>

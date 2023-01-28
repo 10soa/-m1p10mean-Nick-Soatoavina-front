@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlertModule, BadgeModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, PaginationModule, SharedModule, SpinnerModule, TableModule } from '@coreui/angular';
+
+import { AccordionModule, AlertModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, PaginationModule, SharedModule, SpinnerModule, TableModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FactureListeComponent } from './facture-liste/facture-liste.component';
-import { FactureRoutingModule } from './facture-routing.module';
-import { FactureImpayeComponent } from './facture-impaye/facture-impaye.component';
+import { FormsRoutingModule } from '../forms/forms-routing.module';
+import { VoitureRoutingModule } from '../voiture/voiture-routing.module';
+import { ReparationHistoriqueComponent } from './reparation-historique/reparation-historique.component';
+
 
 @NgModule({
   declarations: [
-    FactureListeComponent,
-    FactureImpayeComponent,
+  
+    ReparationHistoriqueComponent
   ],
   imports: [
     CommonModule,
-    FactureRoutingModule,
     CardModule,
     FormModule,
     GridModule,
@@ -29,6 +30,7 @@ import { FactureImpayeComponent } from './facture-impaye/facture-impaye.componen
     ListGroupModule,
     FormsModule,
     ReactiveFormsModule,
+    FormsRoutingModule,
     IconModule,
     ModalModule,
     AlertModule,
@@ -36,8 +38,9 @@ import { FactureImpayeComponent } from './facture-impaye/facture-impaye.componen
     TableModule,
     PaginationModule,
     SpinnerModule,
-    BadgeModule,
+    VoitureRoutingModule,
+    AccordionModule
   ]
 })
-export class FactureModule {
+export class VoitureModule {
 }
