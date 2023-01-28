@@ -92,6 +92,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/voiture/voiture.module').then((m) => m.VoitureModule)
       },
+      {
+        path: 'statistique',
+        loadChildren: () =>
+          import('./views/statistique/statistique.module').then((m) => m.StatistiqueModule)
+      },
     ]
   },
   {

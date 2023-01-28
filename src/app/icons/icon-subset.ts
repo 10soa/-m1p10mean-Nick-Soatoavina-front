@@ -1,6 +1,7 @@
 import {
   cibCcAmex,
   cilCarAlt,
+  cilWalk,
   cibCcApplePay,
   cibCcMastercard,
   cibCcPaypal,
@@ -103,6 +104,7 @@ export const iconSubset = {
   cibCcStripe,
   cibCcVisa,
   cibFacebook,
+  cilWalk,
   cibGoogle,
   cibLinkedin,
   cibSkype,
@@ -206,6 +208,7 @@ export enum IconSubset {
   cifEs = 'cifEs',
   cifFr = 'cifFr',
   cifIn = 'cifIn',
+  cilWalk = 'cilWalk',
   cifPl = 'cifPl',
   cifUs = 'cifUs',
   cilPlus = 'cilPlus',

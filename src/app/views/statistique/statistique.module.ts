@@ -5,15 +5,11 @@ import { AccordionModule, AlertModule, ButtonGroupModule, ButtonModule, CardModu
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormsRoutingModule } from '../forms/forms-routing.module';
-import { VoitureRoutingModule } from '../voiture/voiture-routing.module';
-import { ReparationHistoriqueComponent } from './reparation-historique/reparation-historique.component';
-import { VoitureRecuperationComponent } from './voiture-recuperation/voiture-recuperation.component';
+import { StatistiqueRoutingModule } from '../statistique/statistique-routing.module';
 
 
 @NgModule({
   declarations: [
-    ReparationHistoriqueComponent,
-    VoitureRecuperationComponent
   ],
   imports: [
     CommonModule,
@@ -39,9 +35,9 @@ import { VoitureRecuperationComponent } from './voiture-recuperation/voiture-rec
     TableModule,
     PaginationModule,
     SpinnerModule,
-    VoitureRoutingModule,
+    StatistiqueRoutingModule,
     AccordionModule
   ]
 })
-export class VoitureModule {
+export class StatistiqueModule {
 }
