@@ -11,6 +11,9 @@ import * as internal from 'stream';
 export class ProformaClientComponent {
   public client = JSON.parse(localStorage.getItem('utilisateur') || '{}');
   public index1=0;
+  error = "";
+  visibleError = false;
+  
   public index2=1;
   public listeE=[{
     marque:'',
@@ -24,6 +27,7 @@ export class ProformaClientComponent {
       prix:0
     }]
   }];
+  dismissible = true;
   public listeV=[{
     marque:'',
     modele:'',
@@ -44,6 +48,10 @@ export class ProformaClientComponent {
   ngOnInit() {
     this.listeEnCours(this.client.client_id);
     this.listeValide(this.client.client_id);
+  }
+
+  onAlertVisibleChange(eventValue: any = this.visibleError) {
+    this.visibleError = eventValue;
   }
 
   listeEnCours(clientID:number){
@@ -77,6 +85,8 @@ export class ProformaClientComponent {
       this.listeEnCours(this.client.client_id);
       this.listeValide(this.client.client_id);
   }, error => {
+    this.error = error.error.message;
+    this.visibleError = true;
     console.log(error.error.message)
   })
   }
