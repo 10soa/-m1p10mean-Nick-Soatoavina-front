@@ -66,6 +66,12 @@ export class FactureListeComponent implements OnInit{
           this.paginations = pagination(result.factures.totalPage);
       })
     }
+
+    paiement(montant:number){
+      this.http.put(api('Voiture/paiement/'+this.client.client_id),{montant:montant,date_deposition:this.facture.reparation.date_deposition, ...this.facture}).subscribe((result) => {
+        this.liveDemoVisible = false;
+      },error => { console.log(error.error.message)})
+    }
   
     handleLiveDemoChange(event: boolean) {
       this.liveDemoVisible = event;
@@ -85,7 +91,6 @@ export class FactureListeComponent implements OnInit{
       this.http.get(api('Voiture/facture/'+id+'?date_deposition='+date)).subscribe((result:any) => {
         this.facture = result.result[0];
         this.liste_reparation = this.facture.reparation.liste_reparation;
-        
         this.liveDemoVisible = true;
     })
      }

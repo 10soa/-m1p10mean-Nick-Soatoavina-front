@@ -5,10 +5,12 @@ import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FactureListeComponent } from './facture-liste/facture-liste.component';
 import { FactureRoutingModule } from './facture-routing.module';
+import { FactureImpayeComponent } from './facture-impaye/facture-impaye.component';
 
 @NgModule({
   declarations: [
     FactureListeComponent,
+    FactureImpayeComponent,
   ],
   imports: [
     CommonModule,
