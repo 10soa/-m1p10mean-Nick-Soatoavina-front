@@ -11,21 +11,60 @@ import * as internal from 'stream';
 })
 export class VoitureDeposerComponent {
 
-  off!: string;
-  lim!:string;
+  public off!:number;
+  index = 0;
+  public liveDemoVisible = false;
+  loading = false;
+  public lim!:Number;
+  public clientID!: number;
+  public dateDepos!: Date;
   count!: Number;
-  public reparation={date_deposition:''}
+  public nb!: number[];
+  public reparation=[{
+    reparation:{
+      liste_reparation:[{
+        reparation:'',
+        prix:0,
+        avancement:0
+      }] 
+    }
+  }]
   public liste =[
-    {marque:'',modele:'',numero:'',type_voiture:'',client_id:'',
-    reparation:[this.reparation]}
+    {
+      _id:'',
+      marque:'',
+      modele:'',
+      numero:'',
+      type_voiture:'',
+      client_id:0,
+      reparation:{
+        date_deposition: new Date(),
+        liste_reparation : [{
+          reparation:'',
+          avancement:0
+        }]
+      }}
   ];
   //public liste = new Object([]);
 
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
 
-  listeVoitureDeposer(off:string,lim:string){
-    var url="http://localhost/Mean_projet/Voiture/listeVoitureDeposer/"+Number.parseInt(off)+"/"+Number.parseInt(lim);
-    return this.http.get(url);
+  ngOnInit() {
+    this.countListe();
+    this.route.params.subscribe(params => {
+      this.off=params['off'];
+    });
+    this.listeVoitureDeposer(this.off);
+  }
+
+  listeVoitureDeposer(off:number){
+    var url="http://localhost/Mean_projet/Voiture/listeVoitureDeposer/"+(off*5)+"/5";
+    this.http.get(url).subscribe(
+      (response :any)=>{
+        this.liste=response.result;
+      },
+      (err)=>{console.log(err);}
+    );
     
   }
 
@@ -33,10 +72,59 @@ export class VoitureDeposerComponent {
     var url="http://localhost/Mean_projet/Voiture/countListeVoitureDeposer";
     this.http.get(url).subscribe(
       (response :any)=>{
-        this.count=response.result;
+        var value=Number.parseInt(response.result);
+        if((value%5)!=0){
+          this.count=(Math.floor(value/5))+1;
+        }else{
+          this.count=value.valueOf()/5;
+        }
+        var ii=[];
+        for(var i=0;i<this.count;i++){
+          if(i<value){
+            ii.push(i+1);
+          }
+        }
+        this.nb=ii;
       },
       (err)=>{console.log(err);}
-    ); ;
+    ); 
   }
 
+  detail(id:number,date:Date){
+    var url="http://localhost/Mean_projet/Voiture/listeReparationVoiture1/"+id+"/"+date;
+    this.http.get(url).subscribe(
+      (response :any)=>{
+        this.reparation=response.result;
+        this.liveDemoVisible=true;
+        console.log(this.reparation);
+      },
+      (err)=>{console.log(err);}
+    );
+  }
+
+  toggleLiveDemo() {
+    this.liveDemoVisible = !this.liveDemoVisible;
+    //console.log("demo",this.liveDemoVisible);
+  }
+
+  handleLiveDemoChange(event: boolean) {
+    this.liveDemoVisible = event;
+  }
+
+  validerReception(id:string,date:Date){
+    this.http.post('http://localhost/Mean_projet/Voiture/receptionVoiture/'+id+'/'+date,
+    { 
+      
+    }).subscribe((result: any) => {
+      this.countListe();
+      this.route.params.subscribe(params => {
+        this.off=params['off'];
+      });
+      this.listeVoitureDeposer(this.off);
+      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || "/listeVoitureDeposer/0/5";
+      this.router.navigateByUrl(returnUrl);
+      }, error => {
+        console.log(error.error.message)
+      });
+  }
 }
