@@ -27,7 +27,7 @@ export class ProformaDemandeComponent implements OnInit {
   public listeTypeVoiture = ["SUV","4*4","camion","petit"];
   public client = JSON.parse(localStorage.getItem('utilisateur') || '{}');
   public listeReparation = [{reparation:'',montant:0}];
-  public reparations  = [{reparation : '',montant:0}];
+  public reparations  = [{reparation : '',prix:0}];
   // public client : Object = JSON.parse(localStorage.getItem('utilisateur'));
   constructor(private http: HttpClient,private formBuilder: FormBuilder,private router: Router) { }
 
@@ -49,10 +49,11 @@ export class ProformaDemandeComponent implements OnInit {
 
   addReparation(){
     if(this.reparations[0].reparation === ''){
-      this.reparations[0] = this.listeReparation[this.index];
+      this.reparations[0].prix = this.listeReparation[this.index].montant;
+      this.reparations[0].reparation = this.listeReparation[this.index].reparation;
     }
     else{
-      this.reparations.push(this.listeReparation[this.index]);
+      this.reparations.push({prix : this.listeReparation[this.index].montant , reparation : this.listeReparation[this.index].reparation});
     }
     this.liveDemoVisible = false;
   }
@@ -76,7 +77,7 @@ export class ProformaDemandeComponent implements OnInit {
     if(this.reparations.length > 0 && this.voiture.marque!==''){
       if(this.reparations[0].reparation!==''){
         this.http.post(api("Proforma/demande"),{ client_id:this.client.client_id , marque : this.voiture.marque , numero : this.voiture.numero , modele : this.voiture.modele , reparation : this.reparations,type_voiture:this.voiture.type_voiture}).subscribe((res) => {
-          this.reparations  = [{reparation : '',montant:0}];
+          this.reparations  = [{reparation : '',prix:0}];
           this.router.navigateByUrl('/proforma/demande');},
           error => {})
       }
