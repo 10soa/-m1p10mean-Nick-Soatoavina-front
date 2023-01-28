@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProformaDemandeComponent } from './proforma-demande/proforma-demande.component';
-import { AlertModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, PaginationModule, SharedModule, SpinnerModule, TableModule } from '@coreui/angular';
+import { AlertModule, BadgeModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, NavModule, PaginationModule, SharedModule, SpinnerModule, TableModule, TabsModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProformaRoutingModule } from './proforma-routing.module';
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
 import { FormsRoutingModule } from '../forms/forms-routing.module';
-import { ListeProformaComponent } from './liste-proforma/liste-proforma.component'
+import { ListeProformaComponent } from './liste-proforma/liste-proforma.component';
+import { ProformaClientComponent } from './proforma-client/proforma-client.component'
 
 
 
@@ -16,6 +17,7 @@ import { ListeProformaComponent } from './liste-proforma/liste-proforma.componen
   declarations: [
     ProformaDemandeComponent,
     ListeProformaComponent,
+    ProformaClientComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,9 @@ import { ListeProformaComponent } from './liste-proforma/liste-proforma.componen
     TableModule,
     PaginationModule,
     SpinnerModule,
+    TabsModule,
+    NavModule,
+    BadgeModule
   ]
 })
 export class ProformaModule {

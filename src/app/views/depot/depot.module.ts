@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { CardModule, GridModule, NavModule, UtilitiesModule, TabsModule, ButtonModule } from '@coreui/angular';
+import { CardModule, GridModule, NavModule, UtilitiesModule, TabsModule, ButtonModule, TableModule, PageItemComponent, PaginationComponent, PaginationModule, ModalHeaderComponent, ModalModule, SpinnerModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { DepotComponent } from './depot/depot.component';
 import { VoitureDeposerComponent } from './voiture-deposer/voiture-deposer.component';
 import { DepotRoutingModule } from './Depot-routing.module';
+import { PagesModule } from '../pages/pages.module';
 
 @NgModule({
   imports: [
@@ -21,8 +22,13 @@ import { DepotRoutingModule } from './Depot-routing.module';
     GridModule,
     NavModule,
     TabsModule,
+    TableModule,
     ButtonModule,
-    UtilitiesModule
+    UtilitiesModule,
+    PagesModule,
+    PaginationModule,
+    ModalModule,
+    SpinnerModule
   ],
   declarations: [
     DepotComponent,
