@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FactureListeComponent } from './facture-liste/facture-liste.component';
 import { FactureRoutingModule } from './facture-routing.module';
 import { FactureImpayeComponent } from './facture-impaye/facture-impaye.component';
+import { ValidationPaieComponent } from './validation-paie/validation-paie.component';
 
 @NgModule({
   declarations: [
     FactureListeComponent,
     FactureImpayeComponent,
+    ValidationPaieComponent,
   ],
   imports: [
     CommonModule,

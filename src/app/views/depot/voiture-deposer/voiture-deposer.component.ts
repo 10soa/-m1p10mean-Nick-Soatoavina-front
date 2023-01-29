@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as internal from 'stream';
 
 @Component({
   selector: 'app-voiture-deposer',
@@ -121,8 +119,6 @@ export class VoitureDeposerComponent {
         this.off=params['off'];
       });
       this.listeVoitureDeposer(this.off);
-      const returnUrl = this.route.snapshot.queryParams['returnUrl'] || "/listeVoitureDeposer/0/5";
-      this.router.navigateByUrl(returnUrl);
       }, error => {
         console.log(error.error.message)
       });
