@@ -1,1 +1,42 @@
-<p>bon-sortie works!</p>
+<div class="bg-light min-vh-100 d-flex flex-row">
+    <c-container>
+        <c-row>
+            <c-card>
+                <c-card-body>
+                    <h4 style="text-align: center;">Validation bon de sortie</h4>
+                    <br>
+                    <c-row>
+                        <c-col lg="6">
+                            <div class="example-container" layout-align="center center">
+                                <h5 style="text-align: center;">Liste des voitures récuperées</h5>
+                                <div
+                                  cdkDropList
+                                  #todoList="cdkDropList"
+                                  [cdkDropListData]="todo"
+                                  [cdkDropListConnectedTo]="[doneList]"
+                                  class="example-list"
+                                  (cdkDropListDropped)="drop($event)">
+                                  <div style="text-align: center;"class="example-box" *ngFor="let item of todo" cdkDrag><p style="color:rgb(54, 64, 65)"><strong>{{item.split(",,")[0].replaceAll(","," ")}}</strong></p></div>
+                                </div>
+                              </div>
+                        </c-col>
+                        <c-col lg="6">
+                              <div class="example-container">
+                                <h5 style="text-align: center;">Agréer bon sortie</h5>
+                                <div
+                                  cdkDropList
+                                  #doneList="cdkDropList"
+                                  [cdkDropListData]="done"
+                                  [cdkDropListConnectedTo]="[todoList]"
+                                  class="example-list"
+                                  (cdkDropListDropped)="drop($event)">
+                                  <div class="example-box" *ngFor="let item of done"><strong style="color: darkgreen;">{{item.split(",,")[0].replaceAll(","," ")}}  <svg style="color:rgb(10, 95, 28)"cIcon name="cil-check"></svg></strong> </div>
+                                </div>
+                              </div>
+                        </c-col>
+                    </c-row>
+                </c-card-body>
+            </c-card>    
+        </c-row>
+    </c-container>
+</div>

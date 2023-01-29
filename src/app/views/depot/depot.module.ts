@@ -12,6 +12,7 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReparationClientComponent } from './reparation-client/reparation-client.component';
 import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
     FormModule,
     FormsModule,
     ReactiveFormsModule,
-    AlertModule
+    AlertModule,
+    DragDropModule
   ],
   declarations: [
     DepotComponent,
