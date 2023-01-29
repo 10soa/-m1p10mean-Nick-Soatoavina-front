@@ -11,8 +11,8 @@ import api from 'src/app/const/api';
 })
 export class LoginComponent  implements OnInit {
   form : FormGroup = this.formBuilder.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required]
+    username: ['Rabe10', Validators.required],
+    password: ['1234', Validators.required]
 });
   loading = false;
   submitted = false;
@@ -26,8 +26,8 @@ export class LoginComponent  implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required]
+        username: ['Rabe10', Validators.required],
+        password: ['1234', Validators.required]
     });
   }
 
@@ -42,6 +42,8 @@ export class LoginComponent  implements OnInit {
   login(){
     
     this.submitted = true;
+    console.log( this.f['username'].value,this.f['password'].value);
+    
     if(  this.f['username'].value !== '' &&  this.f['password'].value !==''){
       this.loading = true;
     this.http.post(api('login'),{ nom: this.f['username'].value, mdp:this.f['password'].value}).subscribe((result: any) => {

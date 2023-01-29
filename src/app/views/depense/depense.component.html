@@ -1,0 +1,222 @@
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<div class="bg-light min-vh-100 d-flex flex-row" *ngIf="ready">
+  <c-container>
+    <c-row>
+      <c-card>
+        <c-card-body>
+          <h4 style="text-align: center">Depenses</h4>
+          <button
+            cButton
+            color="primary"
+            size="sm"
+            style="float: right"
+            (click)="pageCreate()"
+          >
+            <svg cIcon name="cil-plus"></svg>
+          </button>
+          <br />
+          <table cTable style="text-align: center">
+            <thead>
+              <tr>
+                <th scope="col">Depense</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Date</th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let vt of listeDepense; index as i">
+                <td>{{ vt.depense }}</td>
+                <td>{{ vt.montant }} AR</td>
+                <td>{{ vt.date.split("T")[0] }}</td>
+                <td>
+                  <button cButton color="dark" size="sm"  (click)="pageModifier(i)">
+                    <svg cIcon name="cil-pencil"></svg>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    cButton
+                    color="danger"
+                    size="sm"
+                    (click)="deleteDepense(vt._id)"
+                  >
+                    <svg cIcon name="cil-trash"></svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <c-pagination aria-label="Page navigation example">
+            <c-page-item
+              *ngFor="let pagination of paginations; index as i"
+              [active]="comparaison(page, i)"
+            >
+              <a class="cursor" (click)="getDepense(i, pageNumber)" cPageLink>{{
+                i + 1
+              }}</a>
+            </c-page-item>
+          </c-pagination>
+        </c-card-body>
+      </c-card>
+    </c-row>
+  </c-container>
+</div>
+
+<!-- creation -->
+<c-modal
+  #verticallyCenteredModal
+  alignment="center"
+  id="verticallyCenteredModal"
+  [visible]="liveDemoVisible"
+  (visibleChange)="handleLiveDemoChange($event)"
+  size="lg"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Ajout d'un depense</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form [formGroup]="form" class="row g-3" cForm>
+        <c-col md="12">
+          <label cLabel for="inputEmail4">Depense</label>
+          <input
+            cFormControl
+            type="text"
+            formControlName="depense"
+            [ngClass]="{ 'is-invalid': submitted && f['depense'].errors }"
+          />
+          <div
+            *ngIf="submitted && f['depense'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['depense'].errors['required']">
+              Le champ depense est obligatoire
+            </div>
+          </div>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputPassword4">Montant</label>
+          <input
+            cFormControl
+            type="text"
+            formControlName="montant"
+            [ngClass]="{ 'is-invalid': submitted && f['montant'].errors }"
+          />
+          <div
+            *ngIf="submitted && f['montant'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['montant'].errors['required']">
+              Le champ montant est obligatoire
+            </div>
+          </div>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputEmail">Date</label>
+          <input
+            cFormControl
+            type="date"
+            formControlName="date"
+            [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+          />
+          <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+            <div *ngIf="f['date'].errors['required']">
+              Le champ date est obligatoire
+            </div>
+          </div>
+        </c-col>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      [cModalToggle]="verticallyCenteredModal.id"
+      cButton
+      color="secondary"
+    >
+      Fermer
+    </button>
+    <button cButton color="primary" (click)="createDepense()" [disabled]="loading">   <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span> Ajouter</button>
+  </c-modal-footer>
+</c-modal>
+
+
+<!-- cmodification-->
+<c-modal
+  #verticallyModal
+  alignment="center"
+  id="verticallyModal"
+  [visible]="liveDemoVisible1"
+  (visibleChange)="handleLiveDemoChange1($event)"
+  size="lg"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Modification d'un depense</h5>
+    <button [cModalToggle]="verticallyModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form [formGroup]="form" class="row g-3" cForm>
+        <c-col md="12">
+          <label cLabel for="inputEmail4">Depense</label>
+          <input
+            cFormControl
+            type="text"
+            formControlName="depense"
+            [ngClass]="{ 'is-invalid': submitted && f['depense'].errors }"
+          />
+          <div
+            *ngIf="submitted && f['depense'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['depense'].errors['required']">
+              Le champ depense est obligatoire
+            </div>
+          </div>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputPassword4">Montant</label>
+          <input
+            cFormControl
+            type="text"
+            formControlName="montant"
+            [ngClass]="{ 'is-invalid': submitted && f['montant'].errors }"
+          />
+          <div
+            *ngIf="submitted && f['montant'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['montant'].errors['required']">
+              Le champ montant est obligatoire
+            </div>
+          </div>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputEmail">Date</label>
+          <input
+            cFormControl
+            type="date"
+            formControlName="date"
+            [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+          />
+          <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+            <div *ngIf="f['date'].errors['required']">
+              Le champ date est obligatoire
+            </div>
+          </div>
+        </c-col>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      [cModalToggle]="verticallyModal.id"
+      cButton
+      color="secondary"
+    >
+      Fermer
+    </button>
+    <button cButton color="primary" (click)="modifier()" [disabled]="loading">   <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span> Modifier</button>
+  </c-modal-footer>
+</c-modal>

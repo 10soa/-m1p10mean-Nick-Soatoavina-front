@@ -96,6 +96,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/statistique/statistique.module').then((m) => m.StatistiqueModule)
       },
+      {
+        path: 'depense',
+        loadChildren: () =>
+          import('./views/depense/depense.module').then((m) => m.DepenseModule)
+      },
     ]
   },
   {

@@ -45,8 +45,6 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { DepotComponent } from './views/depot/depot/depot.component';
-import { VoitureDeposerComponent } from './views/depot/voiture-deposer/voiture-deposer.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
