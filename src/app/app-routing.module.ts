@@ -78,7 +78,7 @@ const routes: Routes = [
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
       },
       {
-        path: 'listeVoitureDeposer',
+        path: 'depotVoiture',
         loadChildren: () =>
           import('./views/depot/depot.module').then((m) => m.DepotModule)
       },

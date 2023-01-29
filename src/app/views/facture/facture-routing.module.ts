@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FactureImpayeComponent } from './facture-impaye/facture-impaye.component';
 import { FactureListeComponent } from './facture-liste/facture-liste.component';
+import { ValidationPaieComponent } from './validation-paie/validation-paie.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,13 @@ const routes: Routes = [
     component: FactureImpayeComponent,
     data: {
       title: "Liste des factures impayés"
+    }
+  },
+  {
+    path: 'validationPaie/:off',
+    component: ValidationPaieComponent,
+    data: {
+      title: "Validation Paiement"
     }
   },
   
