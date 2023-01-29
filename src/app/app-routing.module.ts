@@ -7,7 +7,6 @@ import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { VerificationComponent } from './views/pages/verificationInscription/verification.component';
-import {VoitureDeposerComponent} from './views/depot/voiture-deposer/voiture-deposer.component';
 
 const routes: Routes = [
   {
