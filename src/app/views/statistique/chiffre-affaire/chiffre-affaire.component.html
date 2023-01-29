@@ -1,0 +1,160 @@
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<div class="bg-light min-vh-100 d-flex flex-row" *ngIf="ready === true">
+  <c-container>
+    <c-row>
+      <c-callout class="bg-white">
+        <c-row>
+          <c-col lg="3"></c-col>
+          <c-col lg="6" xs="12">
+            <c-widget-stat-f
+              title="Temps de reparation moyen pour une voiture"
+              class="mb-3"
+              color="danger"
+              padding
+              [value]="tempsMoyen"
+            >
+              <ng-template cTemplateId="widgetIconTemplate">
+                <svg cIcon name="cilCarAlt" size="3xl"></svg>
+              </ng-template>
+            </c-widget-stat-f>
+          </c-col>
+        </c-row>
+      </c-callout>
+    </c-row>
+    <c-row>
+      <c-card>
+        <c-card-body>
+          <form [formGroup]="trafficRadioGroup">
+            <c-button-group class="float-end me-3" role="group">
+              <input
+                class="btn-check"
+                formControlName="trafficRadio"
+                type="radio"
+                value="mois"
+              />
+              <label
+                (click)="setTrafficPeriod('mois')"
+                cButton
+                cFormCheckLabel
+                color="secondary"
+                variant="outline"
+                >Mois</label
+              >
+
+              <input
+                class="btn-check"
+                formControlName="trafficRadio"
+                type="radio"
+                value="jour"
+              />
+              <label
+                (click)="setTrafficPeriod('jour')"
+                cButton
+                cFormCheckLabel
+                color="secondary"
+                variant="outline"
+                >Jour</label
+              >
+            </c-button-group>
+          </form>
+          <h4 style="text-align: center">Chiffre d'affaires</h4>
+
+          <br />
+          <c-row *ngIf="month">
+            <c-col md="4"></c-col>
+            <c-col md="2">
+              <label cLabel for="inputState">Année</label>
+              <select
+                cSelect
+                id="inputState"
+                #teams
+                (change)="onSelected(teams.value)"
+              >
+                <option>---</option>
+                <option
+                  *ngFor="let Annee of listeAnnee; let i = index"
+                  value="{{ Annee }}"
+                >
+                  {{ Annee }}
+                </option>
+              </select>
+            </c-col>
+            <c-col md="2"
+              ><button
+                class="bt"
+                cButton
+                type="submit"
+                color="danger"
+                (click)="getChiffreAffaire('mois', annee)"
+              >
+                Rechercher
+              </button></c-col
+            ><c-col md="2"></c-col
+          ></c-row>
+          <c-row *ngIf="day">
+            <c-col md="3"></c-col>
+            <c-col md="2">
+              <label cLabel for="inputState">Année</label>
+              <select
+                cSelect
+                id="inputState"
+                value="donnee[0]"
+                #teams
+                (change)="onSelectedAnnee(teams.value)"
+              >
+                <option>---</option>
+                <option
+                  *ngFor="let Annee of listeAnnee; let i = index"
+                  value="{{ Annee }}"
+                >
+                  {{ Annee }}
+                </option>
+              </select>
+            </c-col>
+            <c-col md="2">
+              <label cLabel for="inputState">Mois</label>
+
+              <select
+                cSelect
+                id="inputState"
+                #teamMs
+                (change)="onSelectedMois(teamMs.value)"
+                value="donnee[1]"
+              >
+                <option>---</option>
+                <option
+                  *ngFor="let Mois of listeMois; let i = index"
+                  value="{{ i }}"
+                >
+                  {{ Mois }}
+                </option>
+              </select>
+            </c-col>
+            <c-col md="2"
+              ><button
+                class="bt day"
+                cButton
+                type="submit"
+                (click)="getChiffreAffaire('jour', donnee)"
+              >
+                Rechercher
+              </button></c-col
+            ><c-col md="2"></c-col
+          ></c-row>
+          <br />
+          <c-row
+            ><c-col lg="2"></c-col
+            ><c-col lg="8"
+              ><c-chart
+                [data]="dataChiffreAffaire"
+                [options]="option"
+                type="line"
+              ></c-chart></c-col
+          ></c-row>
+        </c-card-body>
+      </c-card>
+    </c-row>
+  </c-container>
+</div>

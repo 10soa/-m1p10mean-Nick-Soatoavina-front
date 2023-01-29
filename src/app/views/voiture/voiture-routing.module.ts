@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReparationHistoriqueComponent } from './reparation-historique/reparation-historique.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
 import { VoitureRecuperationComponent } from './voiture-recuperation/voiture-recuperation.component';
 
 const routes: Routes = [
@@ -16,6 +17,13 @@ const routes: Routes = [
     component: VoitureRecuperationComponent,
     data: {
       title: "Recupération des voitures"
+    }
+  },
+  {
+    path: 'statistique',
+    component: StatistiqueComponent,
+    data: {
+      title: "Statistique"
     }
   },
   

@@ -1,19 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AccordionModule, AlertModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, PaginationModule, SharedModule, SpinnerModule, TableModule } from '@coreui/angular';
+import { AccordionModule, AlertModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, NavModule, PaginationModule, SharedModule, SpinnerModule, TableModule, TabsModule, WidgetModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormsRoutingModule } from '../forms/forms-routing.module';
 import { VoitureRoutingModule } from '../voiture/voiture-routing.module';
 import { ReparationHistoriqueComponent } from './reparation-historique/reparation-historique.component';
 import { VoitureRecuperationComponent } from './voiture-recuperation/voiture-recuperation.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { ChartjsModule } from '@coreui/angular-chartjs';
+import { ChartsModule } from '../charts/charts.module';
 
 
 @NgModule({
   declarations: [
     ReparationHistoriqueComponent,
-    VoitureRecuperationComponent
+    VoitureRecuperationComponent,
+    StatistiqueComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,12 @@ import { VoitureRecuperationComponent } from './voiture-recuperation/voiture-rec
     PaginationModule,
     SpinnerModule,
     VoitureRoutingModule,
-    AccordionModule
+    AccordionModule,
+    ChartjsModule,
+    ChartsModule,
+    TabsModule,
+    NavModule,
+    WidgetModule
   ]
 })
 export class VoitureModule {
