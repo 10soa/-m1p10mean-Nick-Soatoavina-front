@@ -86,6 +86,7 @@
                     <td>
                       <button
                         cButton
+                        [disabled]="loading"
                         color="warning"
                         size="sm"
                         (click)="
@@ -98,7 +99,7 @@
                           )
                         "
                       >
-                        Déposer <svg cIcon name="cil-arrow-circle-left"></svg>
+                      <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span>  Déposer <svg cIcon name="cil-arrow-thick-bottom"></svg>
                       </button>
                     </td>
                   </tr>

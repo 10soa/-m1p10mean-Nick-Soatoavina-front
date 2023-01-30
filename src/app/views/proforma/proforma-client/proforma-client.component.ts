@@ -44,6 +44,7 @@ export class ProformaClientComponent {
    
   }];
   ready = false;
+  loading = false;
 
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
 
@@ -78,6 +79,7 @@ export class ProformaClientComponent {
   }
 
   depotVoiture(i:number,marque:string,modele:string,numero:string,type:string){
+    this.loading =true;
     this.http.post(api('Voiture/'+modele+'/'+marque+'/'+numero+'/'+type+'/'+this.client.client_id),
     { 
         reparation : {
@@ -87,9 +89,11 @@ export class ProformaClientComponent {
     }).subscribe((result: any) => {
       this.listeEnCours(this.client.client_id);
       this.listeValide(this.client.client_id);
+      this.loading = false;
   }, error => {
     this.error = error.error.message;
     this.visibleError = true;
+    this.loading = false;
     console.log(error.error.message)
   })
   }

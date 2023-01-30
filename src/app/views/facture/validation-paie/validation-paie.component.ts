@@ -47,7 +47,6 @@ export class ValidationPaieComponent {
         nom_utilisateur:''
       }]
     };
-
   public liste =[
     {
       marque:'',
@@ -75,6 +74,7 @@ export class ValidationPaieComponent {
       }]
     }
   ];
+  
 
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
 
@@ -133,6 +133,7 @@ export class ValidationPaieComponent {
   }
 
   validerPaiement(mq:string,mod:string,num:string,tp:string,clientID:number,dateD:Date,dateP:Date,paye:number,montP:number,index:number){
+   this.loading = true;
     this.http.put(api('Voiture/validationPaiement'),
   { 
       marque: mq,
@@ -147,8 +148,10 @@ export class ValidationPaieComponent {
     }).subscribe((result: any) => {
       this.liveDemoVisible=false;
       this.listePaiementNV(this.off);
+      this.loading = false;
       }, error => {
         console.log(error.error.message)
+        this.loading = false;
       });
   }
 

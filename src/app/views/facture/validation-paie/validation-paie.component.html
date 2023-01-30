@@ -96,8 +96,8 @@
               <th><c-badge color="danger">En attente</c-badge></th>
               <td>
                 <!--mq:string,mod:string,num:string,tp:string,clientID:number,dateD:Date,dateP:Date,paye:number,montP:number-->
-                <button cButton color="success" size="sm" (click)="validerPaiement(paiement.marque,paiement.modele,paiement.numero,paiement.type_voiture,paiement.client_id,paiement.reparation.date_deposition,rep.date,rep.montant,paiement.reparation.montant_paye,i)">
-                <svg cIcon name="cil-check"></svg> 
+                <button [disabled]="loading" cButton color="success" size="sm" (click)="validerPaiement(paiement.marque,paiement.modele,paiement.numero,paiement.type_voiture,paiement.client_id,paiement.reparation.date_deposition,rep.date,rep.montant,paiement.reparation.montant_paye,i)">
+                  <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span> <svg cIcon name="cil-check"></svg> 
                 </button>
               </td>
             </tr>

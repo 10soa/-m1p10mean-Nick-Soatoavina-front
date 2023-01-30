@@ -84,8 +84,8 @@
                             </c-input-group>
                         </c-col>
                         <c-col md="1" xl="2">
-                            <button cButton class="px-4" color="dark" size="sm" (click)="modifier(listeRep.date_deposition,lr.reparation,lr.avancement)">  
-                                Modifier
+                            <button cButton class="px-4" [disabled]="loading" color="dark" size="sm" (click)="modifier(listeRep.date_deposition,lr.reparation,lr.avancement)">  
+                              <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span>   Modifier
                             </button>
                         </c-col>
                     </c-row>

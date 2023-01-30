@@ -33,8 +33,8 @@
                                     </button>
                                   </td>
                                 <td>
-                                  <button cButton color="danger" size="sm" (click)="validerReception(vt._id,vt.reparation.date_deposition)">
-                                    Garage <svg cIcon name="cil-chevron-right"></svg> 
+                                  <button cButton color="danger" size="sm" [disabled]="loading" (click)="validerReception(vt._id,vt.reparation.date_deposition)">
+                                    <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span>   Garage <svg cIcon name="cil-chevron-right"></svg> 
                                   </button>
                                 </td>
                               </tr>

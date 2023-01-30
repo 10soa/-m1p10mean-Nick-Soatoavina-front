@@ -100,6 +100,7 @@ import {
   cilArrowThickRight,
   cilChartLine,
   cilBarChart,
+  cilArrowThickBottom
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -108,6 +109,7 @@ export const iconSubset = {
   cilChartLine,
   cilBarChart,
   cibCcApplePay,
+  cilArrowThickBottom,
   cilCash,
   cilMoney,
   cilArrowThickRight,
@@ -208,6 +210,7 @@ export const iconSubset = {
 
 export enum IconSubset {
   cibCcAmex = 'cibCcAmex',
+  cilArrowThickBottom = 'cilArrowThickBottom',
   cilNewsPaper = 'cilNewsPaper',
   cilCash = 'cilCash',
   cilBarChart = 'cilBarChart',

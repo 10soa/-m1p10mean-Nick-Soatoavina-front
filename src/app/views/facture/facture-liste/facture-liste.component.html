@@ -185,6 +185,6 @@
     >
       Fermer
     </button>
-    <button *ngIf="facture.reparation.montant_total-facture.reparation.montant_paye !== 0" cButton color="primary" (click)="paiement(facture.reparation.montant_total-facture.reparation.montant_paye)">Payer la facture</button>
+    <button *ngIf="facture.reparation.montant_total-facture.reparation.montant_paye !== 0" [disabled]="loading" cButton color="primary" (click)="paiement(facture.reparation.montant_total-facture.reparation.montant_paye)">  <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span> Payer la facture</button>
   </c-modal-footer>
 </c-modal>

@@ -56,6 +56,8 @@ export class ReparationComponent implements OnInit{
     }
   }]
 
+  public loading = false;
+
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -116,11 +118,13 @@ export class ReparationComponent implements OnInit{
   }
 
   modifier(date:Date,nomRep:string,av:number){
+    this.loading = true;
     this.avance=Number.parseInt(this.f['taux'].value).valueOf()+av;
     if(this.avance>100){
       this.error="Vous dépassez la limite!";
       this.visibleError=true;
       this.submitted=false;
+      this.loading = false;
     }else{
       this.http.put(api('Voiture/modificationAvancement/'+this.mq+'/'+this.mod+'/'+this.num+'/'+this.type+'/'+this.client_id+'/'+date+'/'+nomRep+'/'+this.avance),
     { 
@@ -135,8 +139,10 @@ export class ReparationComponent implements OnInit{
         taux: ['', Validators.required]
       });
       this.liveDemoVisible = false;
+      this.loading = false;
       }, error => {
-        console.log(error.error.message)
+        console.log(error.error.message);
+        this.loading = false;
       });
     this.submitted=false;
     this.visibleError=false;

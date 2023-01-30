@@ -29,6 +29,7 @@ export class FactureListeComponent implements OnInit{
     },};
     public liveDemoVisible = false;
     public liste_reparation = [{reparation: "",prix:0,avancement:0}]
+    loading=false;
     public listeFacture = [
       {
         _id : '',
@@ -70,9 +71,11 @@ export class FactureListeComponent implements OnInit{
     }
 
     paiement(montant:number){
+      this.loading = true;
       this.http.put(api('Voiture/paiement/'+this.client.client_id),{montant:montant,date_deposition:this.facture.reparation.date_deposition, ...this.facture}).subscribe((result) => {
         this.liveDemoVisible = false;
-      },error => { console.log(error.error.message)})
+        this.loading = false;
+      },error => { console.log(error.error.message) ; this.loading = false;})
     }
   
     handleLiveDemoChange(event: boolean) {

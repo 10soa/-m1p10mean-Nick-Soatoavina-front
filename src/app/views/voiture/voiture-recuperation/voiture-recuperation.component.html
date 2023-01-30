@@ -53,8 +53,8 @@
               </ul>
             </td>
             <td>
-              <button cButton (click)="recuperer(i)" color="dark">
-                <svg cIcon name="cilWalk"></svg> Recuperer
+              <button cButton (click)="recuperer(i)" color="dark" [disabled]="loading">
+                <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span>  <svg cIcon name="cilWalk"></svg> Recuperer
               </button>
             </td>
           </tr>

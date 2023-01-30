@@ -110,6 +110,7 @@ export class VoitureDeposerComponent {
   }
 
   validerReception(id:string,date:Date){
+    this.loading = true;
     this.http.post(api('Voiture/receptionVoiture/'+id+'/'+date),
     { 
       
@@ -119,8 +120,10 @@ export class VoitureDeposerComponent {
         this.off=params['off'];
       });
       this.listeVoitureDeposer(this.off);
+      this.loading = false;
       }, error => {
-        console.log(error.error.message)
+        console.log(error.error.message);
+        this.loading = false;
       });
   }
 }

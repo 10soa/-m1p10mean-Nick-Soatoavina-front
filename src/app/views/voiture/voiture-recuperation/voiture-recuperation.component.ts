@@ -15,6 +15,7 @@ export class VoitureRecuperationComponent implements OnInit{
   public client = JSON.parse(localStorage.getItem('utilisateur') || '{}');
   dismissible = true;
   error = '';
+  loading = false;
   visibleError = false;
   public listeVoiture = [{ 
     marque: "Peugeot",
@@ -52,13 +53,16 @@ export class VoitureRecuperationComponent implements OnInit{
   }
 
   recuperer(i: number){
+    this.loading = true;
     this.http.put(api('Voiture/validationRecuperationVoiture/'+this.listeVoiture[i].marque+'/'+this.listeVoiture[i].modele+'/'+this.listeVoiture[i].numero+'/'+this.listeVoiture[i].type_voiture+'/'+this.client.client_id+'/'+this.listeVoiture[i].reparation.montant_total+'/'+this.listeVoiture[i].reparation.date_deposition),{}).subscribe((result:any) => {
       this.listeVoiture = this.listeVoiture.filter((rep,index) => index!==i);
       this.error =""
       this.visibleError = false;
+      this.loading = false;
     },error => {
       this.error = error.error.message;
       this.visibleError = true;
+      this.loading = false;
     })
   }
 
