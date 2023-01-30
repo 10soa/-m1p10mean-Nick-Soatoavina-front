@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReparationClientComponent } from './reparation-client/reparation-client.component';
 import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { CrudReparationComponent } from './crud-reparation/crud-reparation.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     VoitureDeposerComponent,
     ReparationComponent,
     ReparationClientComponent,
-    BonSortieComponent
+    BonSortieComponent,
+    CrudReparationComponent
   ]
 })
 export class DepotModule {
