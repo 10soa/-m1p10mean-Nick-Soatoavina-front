@@ -32,8 +32,65 @@ if(localStorage.getItem('type_user')?.toLowerCase() === 'client'){
     },
     {
       name: 'reparation en cours',
+      url: '/depotVoiture/reparationClient',
+      // linkProps: { fragment: 'someAnchor' },
+      iconComponent: { name: 'cil-settings' }
+    },
+    {
+      name: 'recuperation de voiture',
+      url: '/voiture/recuperation',
+      // linkProps: { fragment: 'someAnchor' },
+      iconComponent: { name: 'cil-car-alt' }
+    },
+    {
+      name: 'historique',
+      url: '/voiture/historique',
+      // linkProps: { fragment: 'someAnchor' },
+      iconComponent: { name: 'cil-history' }
+    },
+    {
+      title: true,
+      name: 'Facture'
+    },
+    {
+      name: 'paiement',
+      url: '/facture/impaye',
+      iconComponent: { name: 'cil-money' }
+    },
+    {
+      name: 'factures',
+      url: '/facture/liste',
+      iconComponent: { name: 'cil-newspaper' }
+    },
+  ]
+}
+else if(localStorage.getItem('type_user')?.toLowerCase() === 'atelier'){
+  nav = [
+    {
+      name: 'Assignation voiture',
       url: '/depotVoiture/liste/0',
-      linkProps: { fragment: 'someAnchor' },
+      iconComponent: { name: 'cil-task'},
+      badge: {
+        color: 'danger',
+        text: 'new'
+      }
+    },
+    {
+      title: true,
+      name: 'Proforma'
+    },
+    {
+      name: 'liste des demandes',
+      url: '/proforma/liste',
+      iconComponent: { name: 'cil-notes' }
+    },
+    {
+      title: true,
+      name: 'Reparation'
+    },
+    {
+      name: 'Reparation en cours',
+      url: '/depotVoiture/reparationClient',
       iconComponent: { name: 'cil-settings' }
     },
   ]

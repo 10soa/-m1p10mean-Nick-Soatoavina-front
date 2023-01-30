@@ -60,6 +60,9 @@ import {
   cilMagnifyingGlass,
   cilMap,
   cilMediaPlay,
+  cilNewspaper,
+  cilMoney,
+  cilCash,
   cilMenu,
   cilMoon,
   cilNotes,
@@ -93,12 +96,16 @@ import {
   cilPhone,
   cilPlus,
   cilArrowCircleLeft,
+  cilHistory,
 } from '@coreui/icons';
 
 export const iconSubset = {
   cibCcAmex,
   cilPlus,
   cibCcApplePay,
+  cilCash,
+  cilMoney,
+  cilNewspaper,
   cibCcMastercard,
   cibCcPaypal,
   cibCcStripe,
@@ -106,6 +113,7 @@ export const iconSubset = {
   cibFacebook,
   cilWalk,
   cibGoogle,
+  cilHistory,
   cibLinkedin,
   cibSkype,
   cibTwitter,
@@ -194,6 +202,10 @@ export const iconSubset = {
 
 export enum IconSubset {
   cibCcAmex = 'cibCcAmex',
+  cilNewsPaper = 'cilNewsPaper',
+  cilCash = 'cilCash',
+  cilMoney = 'cilMoney',
+  cilHistory = 'cilHistory',
   cibCcApplePay = 'cibCcApplePay',
   cibCcMastercard = 'cibCcMastercard',
   cibCcPaypal = 'cibCcPaypal',
