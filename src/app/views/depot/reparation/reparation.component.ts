@@ -15,6 +15,7 @@ export class ReparationComponent implements OnInit{
 });
 
   dismissible = true;
+  ready = false;
   error = '';
   visibleError = false;
   count!: Number;
@@ -23,6 +24,7 @@ export class ReparationComponent implements OnInit{
   public lim!:Number;
   public nb!: number[];
   public avance!:number;
+  public client_id!:number;
   public client = JSON.parse(localStorage.getItem('utilisateur') || '{}');
   public liveDemoVisible = false;
   public mq!:string;
@@ -110,6 +112,7 @@ export class ReparationComponent implements OnInit{
     this.mq=this.listeVt[i].marque;
     this.mod=this.listeVt[i].modele;
     this.num=this.listeVt[i].numero;
+    this.client_id = this.listeVt[i].client_id;
     this.liveDemoVisible=true;
     this.submitted=false;
   }
@@ -121,7 +124,7 @@ export class ReparationComponent implements OnInit{
       this.visibleError=true;
       this.submitted=false;
     }else{
-      this.http.put('http://localhost/Mean_projet/Voiture/modificationAvancement/'+this.mq+'/'+this.mod+'/'+this.num+'/'+this.type+'/'+this.client.client_id+'/'+date+'/'+nomRep+'/'+this.avance,
+      this.http.put('http://localhost/Mean_projet/Voiture/modificationAvancement/'+this.mq+'/'+this.mod+'/'+this.num+'/'+this.type+'/'+this.client_id+'/'+date+'/'+nomRep+'/'+this.avance,
     { 
       
     }).subscribe((result: any) => {
@@ -133,6 +136,7 @@ export class ReparationComponent implements OnInit{
       this.form = this.formBuilder.group({
         taux: ['', Validators.required]
       });
+      this.liveDemoVisible = false;
       }, error => {
         console.log(error.error.message)
       });

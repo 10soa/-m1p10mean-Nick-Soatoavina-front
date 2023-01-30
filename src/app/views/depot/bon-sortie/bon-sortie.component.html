@@ -3,12 +3,15 @@
         <c-row>
             <c-card>
                 <c-card-body>
-                    <h4 style="text-align: center;">Validation bon de sortie</h4>
+                    <h4 style="text-align: center;">Validation bon de sortie  <button cButton class="px-4" color="dark" size="sm" (click)="rafraichir()" style="float:right">  
+                      Rafraichir les données
+                    </button></h4>
                     <br>
                     <c-row>
-                        <c-col lg="6">
+                      <c-col lg="1"></c-col>
+                        <c-col lg="5">
                             <div class="example-container" layout-align="center center">
-                                <h5 style="text-align: center;">Liste des voitures récuperées</h5>
+                                <h5 style="text-align: center;">Liste des voitures récuperées</h5> 
                                 <div
                                   cdkDropList
                                   #todoList="cdkDropList"
@@ -20,9 +23,10 @@
                                 </div>
                               </div>
                         </c-col>
-                        <c-col lg="6">
+                        <c-col lg="5">
                               <div class="example-container">
-                                <h5 style="text-align: center;">Agréer bon sortie</h5>
+                                <h5 style="text-align: center;">Agréer bon sortie 
+                                  </h5>
                                 <div
                                   cdkDropList
                                   #doneList="cdkDropList"

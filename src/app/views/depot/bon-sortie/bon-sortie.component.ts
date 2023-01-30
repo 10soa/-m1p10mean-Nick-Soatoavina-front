@@ -87,4 +87,8 @@ export class BonSortieComponent {
         console.log(error.error.message)
       });
   }
+
+  rafraichir(){
+   this.done = [''];
+  }
 }

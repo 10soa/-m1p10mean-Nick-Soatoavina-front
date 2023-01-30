@@ -64,6 +64,42 @@ if(localStorage.getItem('type_user')?.toLowerCase() === 'client'){
     },
   ]
 }
+else if(localStorage.getItem('type_user')?.toLowerCase() === 'financier'){
+  nav = [
+    {
+      name: 'Validation paiement',
+      url: '/facture/validationPaie/0',
+      iconComponent: { name: 'cil-check'},
+      badge: {
+        color: 'danger',
+        text: 'new'
+      }
+    },
+    {
+      title: true,
+      name: 'Depense'
+    },
+    {
+      name: 'depense',
+      url: '/depense',
+      iconComponent: { name: 'cil-cash' }
+    },
+    {
+      title: true,
+      name: 'Statistique'
+    },
+    {
+      name: 'benefice',
+      url: '/statistique/benefice',
+      iconComponent: { name: 'cil-bar-chart' }
+    },
+    {
+      name: "chiffre d'affaire",
+      url: '/statistique/chiffreAffaire',
+      iconComponent: { name: 'cil-chart-line' }
+    },
+  ]
+}
 else if(localStorage.getItem('type_user')?.toLowerCase() === 'atelier'){
   nav = [
     {
@@ -90,8 +126,18 @@ else if(localStorage.getItem('type_user')?.toLowerCase() === 'atelier'){
     },
     {
       name: 'Reparation en cours',
-      url: '/depotVoiture/reparationClient',
+      url: '/depotVoiture/reparation/0',
       iconComponent: { name: 'cil-settings' }
+    },
+    {
+      name: 'Validation bon de sortie',
+      url: '/depotVoiture/bonSortie',
+      iconComponent: { name: 'cil-arrow-thick-right' }
+    },
+    {
+      name: 'Liste bon de sortie' ,
+      url: '/voiture/bon-sortie',
+      iconComponent: { name: 'cil-list' }
     },
   ]
 }

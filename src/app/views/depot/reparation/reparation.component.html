@@ -69,7 +69,7 @@
             </c-progress>
             <p>{{lr.reparation}} : {{lr.avancement}}%</p>
             <p><strong>{{lr.prix}} Ar</strong></p>
-            <c-row>
+            <c-row *ngIf="lr.avancement !== 100">
                 <form [formGroup]="form" cForm>
                     <c-row>
                         <c-col md="3" xl="4">
