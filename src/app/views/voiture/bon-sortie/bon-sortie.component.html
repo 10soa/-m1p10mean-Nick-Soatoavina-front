@@ -1,0 +1,63 @@
+<div *ngIf="!ready">
+    <c-spinner color="dark"></c-spinner>
+  </div>
+  <div class="bg-light min-vh-100 d-flex flex-row" *ngIf="ready">
+    <c-container>
+      <c-row>
+        <c-card>
+          <c-card-body>
+            <h4 style="text-align: center">Liste des bons de sortie</h4>
+            <br />
+            <table cTable style="text-align: center">
+              <thead>
+                <tr>
+                  <th scope="col">Client</th>
+                  <th scope="col">Voiture</th>
+                  <th scope="col">Numéro d'immatriculation</th>
+                  <th scope="col">Liste des réparations</th>
+                  <th scope="col">Date de déposition</th>
+                  <th scope="col">Date de reception</th>
+                  <th scope="col">Date de recupération</th>
+                  <th scope="col">Date de bon de sortie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let vt of listeBonSortie; index as i">
+                  <td>{{ vt.client[0].nom}} {{ vt.client[0].prenom}}</td>
+                  <td>{{ vt.marque}} {{vt.modele}}</td>
+                  <td>{{ vt.numero}}</td>
+                  <td>
+                    <ul>
+                        <li
+                          *ngFor="
+                            let repa of vt.reparation.liste_reparation;
+                            index as iii
+                          "
+                          class="rep"
+                        >
+                          {{ repa.reparation }}
+                        </li>
+                      </ul>
+                  </td>
+                  <td>{{ vt.reparation.date_deposition.replace('T',' ').replace('Z','')}}</td>
+                  <td>{{ vt.reparation.date_reception.replace('T',' ').replace('Z','')}}</td>
+                  <td>{{ vt.reparation.date_recuperation.replace('T',' ').replace('Z','')}}</td>
+                  <td>{{ vt.reparation.bon_sortie.replace('T',' ').replace('Z','')}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <c-pagination aria-label="Page navigation example">
+              <c-page-item
+                *ngFor="let pagination of paginations; index as i"
+                [active]="comparaison(page, i)"
+              >
+                <a class="cursor" (click)="getBonSorties(i, pageNumber)" cPageLink>{{
+                  i + 1
+                }}</a>
+              </c-page-item>
+            </c-pagination>
+          </c-card-body>
+        </c-card>
+      </c-row>
+    </c-container>
+  </div>

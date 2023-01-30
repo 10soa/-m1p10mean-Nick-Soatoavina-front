@@ -11,13 +11,15 @@ import { VoitureRecuperationComponent } from './voiture-recuperation/voiture-rec
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { ChartsModule } from '../charts/charts.module';
+import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
 
 
 @NgModule({
   declarations: [
     ReparationHistoriqueComponent,
     VoitureRecuperationComponent,
-    StatistiqueComponent
+    StatistiqueComponent,
+    BonSortieComponent
   ],
   imports: [
     CommonModule,

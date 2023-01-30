@@ -79,11 +79,10 @@ export class StatistiqueComponent {
   constructor(private http: HttpClient,private formBuilder: FormBuilder,private router: Router) { }
 
   async ngOnInit() {
-    this.getBenefice(null);
+    this.getChiffreAffaire(this.typeDonnee,null);
     this.tempsReparationMoyen();
-    if(this.ready1 === true){
-    await this.getChiffreAffaire(this.typeDonnee,null);
-    }
+    
+    this.getBenefice(null);
   }
 
   getBenefice(annee:any){
@@ -109,7 +108,7 @@ export class StatistiqueComponent {
         this.dataBenefice.datasets[0].data = data;
         this.dataBenefice.datasets[0].label="Benefice par mois pour l'année "+result.annee;
         console.log(this.dataBenefice,"lol");
-        this.ready1 = true;
+        this.ready = true;
     },error => {})
   }
 
@@ -167,10 +166,10 @@ export class StatistiqueComponent {
       }
       this.dataChiffreAffaire.datasets[0].data = data;
       console.log("couc");
-      if(this.ready1){
-        this.ready = true;
-      }
-      this.ready = true;
+      // if(this.ready1){
+      //   this.ready = true;
+      // }
+      // this.ready = true;
     },error => {})
   }
 }
