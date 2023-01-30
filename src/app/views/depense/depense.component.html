@@ -180,6 +180,7 @@
           <label cLabel for="inputPassword4">Montant</label>
           <input
             cFormControl
+            autoComplete="montant"
             type="text"
             formControlName="montant"
             [ngClass]="{ 'is-invalid': submitted && f['montant'].errors }"

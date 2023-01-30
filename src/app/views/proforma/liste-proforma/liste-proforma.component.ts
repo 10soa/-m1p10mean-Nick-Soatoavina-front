@@ -81,7 +81,7 @@ export class ListeProformaComponent implements OnInit {
   validationProforma(){
     this.loading = true;
     this.demandeProforma[this.index].reparation = [...this.reparationSelectioned];
-    this.http.post(api('Proforma/reponse'),this.demandeProforma[this.index]).subscribe(async (result) => {
+    this.http.post(api('Proforma/reponse'),{url: window.location.origin , ...this.demandeProforma[this.index]}).subscribe(async (result) => {
       await this.getDemandeProforma(this.page,this.pageNumber);
       this.loading = false;
       this.liveDemoVisible = false;
