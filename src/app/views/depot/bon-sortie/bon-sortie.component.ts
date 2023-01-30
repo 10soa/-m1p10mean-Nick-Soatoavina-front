@@ -24,6 +24,7 @@ export class BonSortieComponent {
       date_recuperation: new Date(),
     }
   }]
+  ready = false;
 
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router,private formBuilder: FormBuilder) { }
 
@@ -67,6 +68,7 @@ export class BonSortieComponent {
         }
         this.todo=todo;
         console.log(this.todo);
+        this.ready = true;
       },
       (err)=>{console.log(err);}
     ); 

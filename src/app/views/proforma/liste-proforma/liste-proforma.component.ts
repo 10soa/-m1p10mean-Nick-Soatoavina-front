@@ -14,6 +14,7 @@ export class ListeProformaComponent implements OnInit {
   public paginations = [1];
   public reparationSelectioned = [ { reparation: '', prix: 0 }];
   loading = false;
+  ready = false;
   demandeProforma = [
     {
       _id: "",
@@ -45,6 +46,7 @@ export class ListeProformaComponent implements OnInit {
       this.page = result.data.page;
       this.pagination(result.data.totalPage);
       this.listeDemande = result.data.liste;
+      this.ready = true;
     }, error => {})
    }
 

@@ -1,4 +1,7 @@
-<c-col xs="12">
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<c-col xs="12" *ngIf="ready">
   <c-card class="mb-4">
     <c-card-header>
       <strong> Liste des proforma à valider </strong>

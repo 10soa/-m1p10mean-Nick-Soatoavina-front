@@ -11,6 +11,7 @@ import api from 'src/app/const/api';
 export class ValidationPaieComponent {
 
   public off:number=0;
+  ready = false;
   public nomClient!:string;
   index = 0;
   public liveDemoVisible = false;
@@ -110,6 +111,7 @@ export class ValidationPaieComponent {
       (response :any)=>{
         this.liste=response.result;
         console.log(this.liste);
+        this.ready = true;
       },
       (err)=>{console.log(err);}
     );

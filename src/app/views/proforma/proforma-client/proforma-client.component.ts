@@ -43,6 +43,7 @@ export class ProformaClientComponent {
     }]
    
   }];
+  ready = false;
 
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
 
@@ -70,6 +71,7 @@ export class ProformaClientComponent {
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeV=response.data;
+        this.ready  = true;
       },
       (err)=>{console.log(err);}
     );

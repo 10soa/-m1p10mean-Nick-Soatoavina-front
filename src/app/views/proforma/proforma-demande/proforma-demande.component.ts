@@ -18,6 +18,7 @@ export class ProformaDemandeComponent implements OnInit {
   visibleError = false;
   public type = "SUV";
   public index = -1;
+  ready = false;
   form : FormGroup = this.formBuilder.group({
     numero: ['', Validators.required],
     marque: ['', Validators.required],
@@ -38,6 +39,7 @@ export class ProformaDemandeComponent implements OnInit {
   getVoitures(){
     this.http.get(api("Voiture/historique/"+this.client.client_id)).subscribe( (result : any) =>{
       this.listeVoiture = result.data;
+      this.ready = true;
     }
       )
   }

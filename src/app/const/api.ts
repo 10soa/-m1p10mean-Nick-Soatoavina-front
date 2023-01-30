@@ -1,6 +1,7 @@
 export default function api(link: String)
 {
-    return "http://localhost/Mean_projet/"+link
+    return "https://m1p10mean-nick-soatoavina-back.up.railway.app/Mean_projet/"+link
+    // return "http://localhost/Mean_projet/"+link
 }
 
 export function pagination(totalPage: Number){

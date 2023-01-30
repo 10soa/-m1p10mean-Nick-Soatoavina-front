@@ -19,6 +19,7 @@ export class ReparationClientComponent implements OnInit{
   public mod!:string;
   public num!:string;
   public type!: string;
+  ready = false;
   public listeRep={
     liste_reparation:[{
       reparation:'',
@@ -56,6 +57,7 @@ export class ReparationClientComponent implements OnInit{
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeVt=response.result;
+        this.ready = true;
       },
       (err)=>{console.log(err);}
     );

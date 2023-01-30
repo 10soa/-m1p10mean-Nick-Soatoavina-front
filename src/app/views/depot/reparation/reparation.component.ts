@@ -93,6 +93,7 @@ export class ReparationComponent implements OnInit{
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeVt=response.result;
+        this.ready = true;
       },
       (err)=>{console.log(err);}
     );

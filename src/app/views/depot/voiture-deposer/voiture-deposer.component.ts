@@ -28,6 +28,7 @@ export class VoitureDeposerComponent {
       }] 
     }
   }]
+  ready = false;
   public liste =[
     {
       _id:'',
@@ -58,6 +59,7 @@ export class VoitureDeposerComponent {
     this.http.get(url).subscribe(
       (response :any)=>{
         this.liste=response.result;
+        this.ready = true;
       },
       (err)=>{console.log(err);}
     );

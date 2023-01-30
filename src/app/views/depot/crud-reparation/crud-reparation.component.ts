@@ -43,7 +43,7 @@ export class CrudReparationComponent implements OnInit{
   type1!:string;
   iD!:string;
   public listeTypeVoiture = ["SUV","4*4","camion","petit"];
-
+  ready = false;
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -65,6 +65,7 @@ export class CrudReparationComponent implements OnInit{
     this.http.get(url).subscribe(
       (response :any)=>{
         this.liste=response.data;
+        this.ready = true;
       },
       (err)=>{console.log(err);
         this.liste=[{

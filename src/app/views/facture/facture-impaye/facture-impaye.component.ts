@@ -56,6 +56,7 @@ export class FactureImpayeComponent {
   page = 0;
   pageNumber = 100;
   paginations!:number[];
+  ready = false;
   public client = JSON.parse(localStorage.getItem('utilisateur') || '{}');
   constructor(private http: HttpClient,private formBuilder: FormBuilder,private router: Router){}
 
@@ -69,6 +70,7 @@ export class FactureImpayeComponent {
         this.pageNumber = pageNumber;
         this.listeFacture = result.factures.facture;
         this.paginations = pagination(result.factures.totalPage);
+        this.ready = true;
     })
   }
 

@@ -1,4 +1,7 @@
-<c-row>
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<c-row *ngIf="ready">
   <c-col xs="12">
     <c-card class="mb-4">
       <c-card-header ngPreserveWhitespaces>
