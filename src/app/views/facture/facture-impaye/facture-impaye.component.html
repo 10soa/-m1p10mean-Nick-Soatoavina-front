@@ -1,0 +1,181 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+      
+    <c-card-body>
+        <h2 style="text-align:center">Liste de vos factures impayés</h2>
+      <br>
+      <table cTable>
+        <thead>
+          <tr>
+            <th scope="col">Marque</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Numero</th>
+            <th scope="col">Voiture</th>
+            <th scope="col">Date de deposition</th>
+            <th scope="col">Montant total</th>
+            <th scope="col">Montant payé</th>
+            <th scope="col">Reste à payé</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let facture of listeFacture; index as i">
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.marque }}
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.modele }}
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.numero }}
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.type_voiture }}
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.reparation.date_deposition.replace("T", " ") }}
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.reparation.montant_total }} AR
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              {{ facture.reparation.montant_paye }} AR
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+              style="color: rgb(229, 83, 83)"
+            >
+              <strong
+                >{{
+                  facture.reparation.montant_total -
+                    facture.reparation.montant_paye
+                }}
+                AR
+              </strong>
+            </td>
+            <td
+              *ngIf="
+                facture.reparation.montant_total -
+                  facture.reparation.montant_paye !==
+                0
+              "
+            >
+              <a
+                class="cursor"
+                (click)="
+                  pagePaiement(
+                    i,
+                    facture.reparation.montant_total -
+                      facture.reparation.montant_paye
+                  )
+                "
+                >Payer
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </c-card-body>
+  </c-card>
+</c-col>
+
+<c-modal
+  #verticallyCenteredModal
+  alignment="center"
+  id="verticallyCenteredModal"
+  [visible]="liveDemoVisible"
+  (visibleChange)="handleLiveDemoChange($event)"
+  size="lg"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Paiement</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <c-row>
+    <c-col md="3"></c-col>
+    <c-col md="6">
+      <label cLabel for="inputPassword4">Montant</label>
+      <input cFormControl type="number" min="1" max={{diff}}  [(ngModel)]="paie"/>
+    </c-col></c-row>
+    <br>
+    <c-alert
+            #alertWithButtonCloseTemplate="cAlert"
+            [dismissible]="dismissible"
+            [visible]="visibleError"
+            (visibleChange)="onAlertVisibleChange($event)"
+            color="danger"
+            fade
+            variant="solid"
+          >
+            <ng-template
+              [ngIf]="alertWithButtonCloseTemplate.dismissible"
+              cTemplateId="alertButtonCloseTemplate"
+            >
+              <button
+                (click)="visibleError = false"
+                cButtonClose
+                white
+              ></button>
+            </ng-template>
+            {{ error }}
+          </c-alert>
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      cButton
+      color="secondary"
+      [cModalToggle]="verticallyCenteredModal.id"
+    >
+      Fermer
+    </button>
+    <button cButton color="primary" (click)="paiement(paie)" *ngIf="paie">Payer {{paie+" AR"}}</button>
+    <button cButton color="primary" (click)="paiement(paie)" *ngIf="!paie" disabled>Payer </button>
+  </c-modal-footer>
+</c-modal>

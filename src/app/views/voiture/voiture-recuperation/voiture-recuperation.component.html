@@ -1,0 +1,84 @@
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<c-col xs="12" *ngIf="ready">
+  <c-card class="mb-4">
+    <c-card-body>
+      <h2 style="text-align: center">Liste des voitures à récuperer</h2>
+      <br />
+      <table cTable style="text-align: center">
+        <thead>
+          <tr>
+            <th scope="col">Voiture</th>
+            <th scope="col">Marque</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Numero d'immatriculation</th>
+            <th scope="col">Date de deposition</th>
+            <th scope="col">Date de reception au garage</th>
+            <th scope="col">Reparations</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let voiture of listeVoiture; index as i">
+            <td>{{ voiture.type_voiture }}</td>
+            <td>{{ voiture.marque }}</td>
+            <td>{{ voiture.modele }}</td>
+            <td>{{ voiture.numero }}</td>
+            <td>
+              {{
+                voiture.reparation.date_deposition
+                  .replace("T", " ")
+                  .replace("Z", "")
+              }}
+            </td>
+            <td>
+              {{
+                voiture.reparation.date_reception
+                  .replace("T", " ")
+                  .replace("Z", "")
+              }}
+            </td>
+            <td>
+              <ul>
+                <li
+                  *ngFor="
+                    let repa of voiture.reparation.liste_reparation;
+                    index as iii
+                  "
+                  class="rep"
+                >
+                  {{ repa.reparation }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <button cButton (click)="recuperer(i)" color="dark">
+                <svg cIcon name="cilWalk"></svg> Recuperer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <c-alert
+        #alertWithButtonCloseTemplate="cAlert"
+        [dismissible]="dismissible"
+        [visible]="visibleError"
+        (visibleChange)="onAlertVisibleChange($event)"
+        color="danger"
+        fade
+        variant="solid"
+        style="text-align: center;"
+      >
+        <ng-template
+          [ngIf]="alertWithButtonCloseTemplate.dismissible"
+          cTemplateId="alertButtonCloseTemplate"
+        >
+          <button (click)="visibleError = false" cButtonClose white></button>
+        </ng-template>
+        {{ error }}
+      </c-alert>
+    </c-card-body>
+  </c-card>
+</c-col>

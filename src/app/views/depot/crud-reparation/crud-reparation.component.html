@@ -1,0 +1,148 @@
+<div class="bg-light min-vh-100 d-flex flex-row">
+    <c-container>
+        <c-row>
+            <c-card>
+                <c-card-body>
+                    <h4 style="text-align: center;">Création d'une nouvelle réparation</h4>
+                    <br>
+                    <form [formGroup]="form" cForm>
+                      <c-row>
+                         
+                              <c-input-group class="mb-3" >
+                                  <input autoComplete="reparation" cFormControl placeholder="Nouvelle réparation..." type="text" formControlName="reparation" [ngClass]="{ 'is-invalid': submitted && f['reparation'].errors }"/>
+                                <div *ngIf="submitted && f['reparation'].errors" class="invalid-feedback">
+                                  <div *ngIf="f['reparation'].errors['required']"></div>
+                                </div>
+                              </c-input-group>
+          
+                              <c-input-group class="mb-3" >
+                                  <input autoComplete="montant" cFormControl placeholder="Montant en AR..." type="number" formControlName="montant" [ngClass]="{ 'is-invalid': submitted && f['montant'].errors }"/>
+                                <div *ngIf="submitted && f['montant'].errors" class="invalid-feedback">
+                                  <div *ngIf="f['montant'].errors['required']"></div>
+                                </div>
+                              </c-input-group>
+                              <label cLabel for="inputPassword">Type de voiture</label> 
+                              <div class="mb-3" >
+                                  <select cSelect id="select" #type (change)="typeSelected(type.value)">
+                                      <option *ngFor="let type of listeTypeVoiture" value="{{ type }}">
+                                      {{ type }}
+                                      </option>
+                                  </select>
+                              </div>
+                              <br>
+                              <div class="mb-3" >
+                                <button cButton class="px-4" color="dark" size="sm" (click)="ajouter()">  
+                                  Créée <svg cIcon name="cil-plus"></svg>
+                              </button>
+                              </div>
+                      </c-row>
+                    </form>
+                    <br>
+                    <h4 style="text-align: center;">Liste des réparations</h4>
+                    <br>
+                    <table cTable>
+                        <thead>
+                        <tr>
+                        <th scope="col">Désignation</th>
+                        <th scope="col">Type voiture</th>
+                        <th scope="col" style="text-align:center">Prix de désignation</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let vt of liste; index as i">
+                                <th>{{ vt.reparation }}</th>
+                                <td>{{ vt.type_voiture }}</td>
+                                <td style="text-align: center;">{{ vt.montant }} AR</td>
+                                <td>
+                                  <button cButton color="info" size="sm" (click)="modificationModal(vt.reparation,vt.type_voiture,vt.montant,vt._id)">
+                                    Modifier <svg cIcon name="cil-pen"></svg> 
+                                  </button>
+                                </td>
+                                <td>
+                                    <button cButton color="danger" size="sm" (click)="suppression(vt._id)">
+                                    Supprimer <svg cIcon name="cil-chevron-right"></svg> 
+                                    </button>
+                                  </td>
+                              </tr>
+                        </tbody>
+                        </table>
+                        <c-pagination aria-label="Page navigation example"
+                            *ngIf="count!==0"
+                        >
+                          <c-page-item
+                            *ngFor="let n of nb; index as i">
+                            <a
+                              class="cursor"
+                              (click)="listeReparation(i)"
+                              cPageLink
+                              >{{ i + 1 }}</a
+                            >
+                          </c-page-item>
+                        </c-pagination>
+                </c-card-body>
+            </c-card>    
+        </c-row>
+    </c-container>
+</div>
+
+<!-- Modification -->
+<c-modal
+    #verticallyCenteredModal
+    alignment="center"
+    id="verticallyCenteredModal"
+    [visible]="liveDemoVisibleModification"
+    (visibleChange)="handleLiveDemoChangeModifier($event)"
+    size="lg"
+  >
+    <c-modal-header>
+      <h5 cModalTitle>Modifier une réparation</h5>
+    </c-modal-header>
+    <c-modal-body>
+        <form [formGroup]="form1" cForm>
+            <c-row>
+               
+                    <c-input-group class="mb-3" >
+                        <input autoComplete="reparation" cFormControl type="text" formControlName="reparation" [ngClass]="{ 'is-invalid': submitted && f1['reparation'].errors }"/>
+                      <div *ngIf="submitted && f1['reparation'].errors" class="invalid-feedback">
+                        <div *ngIf="f1['reparation'].errors['required']"></div>
+                      </div>
+                    </c-input-group>
+
+                    <c-input-group class="mb-3" >
+                        <input autoComplete="montant" cFormControl type="number" formControlName="montant" [ngClass]="{ 'is-invalid': submitted && f1['montant'].errors }"/>
+                      <div *ngIf="submitted && f1['montant'].errors" class="invalid-feedback">
+                        <div *ngIf="f1['montant'].errors['required']"></div>
+                      </div>
+                    </c-input-group>
+                    <c-input-group class="mb-3" >
+                      <input autoComplete="typeVt" cFormControl type="text" formControlName="typeVt" [ngClass]="{ 'is-invalid': submitted && f1['typeVt'].errors }"/>
+                    <div *ngIf="submitted && f1['typeVt'].errors" class="invalid-feedback">
+                      <div *ngIf="f1['typeVt'].errors['required']"></div>
+                    </div>
+                  </c-input-group>
+                    <label cLabel for="inputPassword">Type de voiture</label>
+                    <div class="mb-3" >
+                        <select cSelect id="select" #type1 (change)="typeSelectedModif(type1.value)">
+                            <option *ngFor="let type of listeTypeVoiture" value="{{ type }}">
+                            {{ type }}
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                    <button cButton class="px-4" color="warning" size="sm" (click)="modifierReparation(iD)">  
+                        Appliquer
+                    </button>
+             
+            </c-row>
+          </form>
+    </c-modal-body>
+    <c-modal-footer>
+      <button
+        [cModalToggle]="verticallyCenteredModal.id"
+        cButton
+        color="secondary"
+      ><svg cIcon name="cil-arrow-circle-left"></svg> </button>
+    </c-modal-footer>
+</c-modal>

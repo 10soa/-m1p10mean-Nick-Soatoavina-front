@@ -1,0 +1,94 @@
+<div class="bg-light min-vh-100 d-flex flex-row">
+    <c-container>
+        <c-row>
+            <c-card>
+                <c-card-body>
+                    <h4 style="text-align: center;">Liste des voitures déposées</h4>
+                    <br>
+                    <table cTable>
+                        <thead>
+                        <tr>
+                        <th scope="col">Modele</th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Type voiture</th>
+                        <th scope="col">Date déposition</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let vt of liste; index as i">
+                                <th>{{ vt.modele }}</th>
+                                <td>{{ vt.marque }}</td>
+                                <td>{{ vt.numero }}</td>
+                                <td>{{ vt.type_voiture }}</td>
+                                <td>{{ vt.reparation.date_deposition }}</td>
+                                <td>
+                                    <button cButton color="success" size="sm" (click)="detail(vt.client_id,vt.reparation.date_deposition)">
+                                      <svg cIcon name="cil-chevron-left"></svg> Detail
+                                    </button>
+                                  </td>
+                                <td>
+                                  <button cButton color="danger" size="sm" (click)="validerReception(vt._id,vt.reparation.date_deposition)">
+                                    Garage <svg cIcon name="cil-chevron-right"></svg> 
+                                  </button>
+                                </td>
+                              </tr>
+                        </tbody>
+                        </table>
+                        <c-pagination aria-label="Page navigation example"
+                            *ngIf="count!==0"
+                        >
+                          <c-page-item
+                            *ngFor="let n of nb; index as i">
+                            <a
+                              class="cursor"
+                              (click)="listeVoitureDeposer(i)"
+                              cPageLink
+                              >{{ i + 1 }}</a
+                            >
+                          </c-page-item>
+                        </c-pagination>
+                </c-card-body>
+            </c-card>    
+        </c-row>
+    </c-container>
+</div>
+
+<c-modal
+    #verticallyCenteredModal
+    alignment="center"
+    id="verticallyCenteredModal"
+    [visible]="liveDemoVisible"
+    (visibleChange)="handleLiveDemoChange($event)"
+  >
+    <c-modal-header>
+      <h5 cModalTitle>Liste reparation</h5>
+    </c-modal-header>
+    <c-modal-body>
+      <table cTable>
+        <thead>
+        <tr>
+        <th scope="col" style="text-align: center;">Désignation</th>
+        <th scope="col" style="text-align: center;">Avancement</th>
+        <th scope="col" style="text-align: center;">Prix de désigantion</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rep of reparation[0].reparation.liste_reparation; index as i">
+              <th style="color:red;text-align: center;">{{ rep.reparation }}</th>
+              <th style="text-align: center;">{{ rep.avancement }}</th>
+              <th style="text-align: center;">{{ rep.prix }}</th>
+            </tr>
+        </tbody>
+        </table>
+    </c-modal-body>
+    <c-modal-footer>
+      <button
+        [cModalToggle]="verticallyCenteredModal.id"
+        cButton
+        color="secondary"
+      ><svg cIcon name="cil-arrow-circle-left"></svg> </button>
+    </c-modal-footer>
+  </c-modal>

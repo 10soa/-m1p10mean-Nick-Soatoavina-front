@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
   template: '<router-outlet></router-outlet>',
 })
 export class AppComponent implements OnInit {
-  title = 'm1p10mean-Nick-Soa';
+  title = 'm1p10mean-Nick-Soatoavina';
 
   constructor(
     private router: Router,

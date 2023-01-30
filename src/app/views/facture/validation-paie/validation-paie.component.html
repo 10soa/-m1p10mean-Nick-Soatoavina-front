@@ -1,0 +1,111 @@
+<div class="bg-light min-vh-100 d-flex flex-row">
+    <c-container>
+        <c-row>
+            <c-card>
+                <c-card-body>
+                    <h4 style="text-align: center;">Paiements à valider</h4>
+                    <br>
+                    <table cTable>
+                        <thead>
+                        <tr>
+                        <th scope="col">Client</th>
+                        <th scope="col">Modele</th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Type voiture</th>
+                        <th scope="col">Liste réparation</th>
+                        <th scope="col">Reste à payer</th>
+                        <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let vt of liste; index as i">
+                                <th style="color:brown">{{ vt.client[0].nom_utilisateur }}</th>
+                                <th>{{ vt.modele }}</th>
+                                <td>{{ vt.marque }}</td>
+                                <td>{{ vt.numero }}</td>
+                                <td>{{ vt.type_voiture }}</td>
+                                <td>
+                                    <tr *ngFor="let rep of vt.reparation.liste_reparation; index as ii">
+                                        <td>{{ rep.reparation }}</td>
+                                        <td style="text-align: right">{{ rep.prix }} AR</td>
+                                      </tr>
+                                      <tr>
+                                        <td><strong>Total : </strong></td>
+                                        <td style="text-align: right; color: darkgreen">
+                                          <strong>{{ vt.reparation.montant_total }} AR</strong>
+                                        </td>
+                                      </tr> 
+                                </td>
+                                <td><strong>{{ vt.reparation.montant_total-vt.reparation.montant_paye }} AR</strong></td>
+                                <td>
+                                  <button cButton color="danger" size="sm" (click)="detail(i)">
+                                    Détail <svg cIcon name="cil-chevron-right"></svg> 
+                                  </button>
+                                </td>
+                              </tr>
+                        </tbody>
+                        </table>
+                        <c-pagination aria-label="Page navigation example"
+                            *ngIf="count!==0"
+                        >
+                          <c-page-item
+                            *ngFor="let n of nb; index as i">
+                            <a
+                              class="cursor"
+                              cPageLink
+                              >{{ i + 1 }}</a
+                            >
+                          </c-page-item>
+                        </c-pagination>
+                </c-card-body>
+            </c-card>    
+        </c-row>
+    </c-container>
+</div>
+
+
+<c-modal
+    #verticallyCenteredModal
+    alignment="center"
+    id="verticallyCenteredModal"
+    [visible]="liveDemoVisible"
+    (visibleChange)="handleLiveDemoChange($event)"
+    size="lg"
+  >
+    <c-modal-header>
+      <h5 cModalTitle>Paiements éffectuer par <strong style="color:brown">{{nomClient}}</strong></h5>
+    </c-modal-header>
+    <c-modal-body>
+      <table cTable>
+        <thead>
+        <tr>
+        <th scope="col">Date de paiement</th>
+        <th scope="col">Montant</th>
+        <th scope="col">Etat</th>
+        <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rep of paiement.reparation.paiement; index as i">
+              <th>{{ rep.date }}</th>
+              <th style="text-align: right;">{{ rep.montant }} AR</th>
+              <th><c-badge color="danger">En attente</c-badge></th>
+              <td>
+                <!--mq:string,mod:string,num:string,tp:string,clientID:number,dateD:Date,dateP:Date,paye:number,montP:number-->
+                <button cButton color="success" size="sm" (click)="validerPaiement(paiement.marque,paiement.modele,paiement.numero,paiement.type_voiture,paiement.client_id,paiement.reparation.date_deposition,rep.date,rep.montant,paiement.reparation.montant_paye,i)">
+                <svg cIcon name="cil-check"></svg> 
+                </button>
+              </td>
+            </tr>
+        </tbody>
+        </table>
+    </c-modal-body>
+    <c-modal-footer>
+      <button
+        [cModalToggle]="verticallyCenteredModal.id"
+        cButton
+        color="secondary"
+      ><svg cIcon name="cil-arrow-circle-left"></svg> </button>
+    </c-modal-footer>
+  </c-modal>

@@ -5,51 +5,88 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-              <form cForm>
+              <form [formGroup]="form" cForm>
                 <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your account</p>
+                <p class="text-medium-emphasis">
+                  Connectez-vous à votre compte
+                </p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <input
+                    cFormControl
+                    placeholder="Nom d'utilisateur"
+                    formControlName="username"
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+                  />
+                  <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                    <div *ngIf="f['username'].errors['required']">Veuillez saisir votre nom d'utilisateur </div>
+                </div>
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
                   <input
-                    autoComplete="current-password"
                     cFormControl
-                    placeholder="Password"
+                    placeholder="Mot de passe"
+                    formControlName="password"
                     type="password"
+                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
                   />
+                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">Veuillez saisir votre mot de passe </div>
+                </div>
                 </c-input-group>
                 <c-row>
+                  <c-alert
+                    #alertWithButtonCloseTemplate="cAlert"
+                    [dismissible]="dismissible"
+                    [visible]="visibleError"
+                    (visibleChange)="onAlertVisibleChange($event)"
+                    color="danger"
+                    fade
+                    variant="solid"
+                  >
+                    <ng-template
+                      [ngIf]="alertWithButtonCloseTemplate.dismissible"
+                      cTemplateId="alertButtonCloseTemplate"
+                    >
+                      <button
+                        (click)="visibleError = false"
+                        cButtonClose
+                        white
+                      ></button>
+                    </ng-template>
+                    {{ error }}
+                  </c-alert>
+                  <c-col xs="3"></c-col>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary">
-                      Login
-                    </button>
-                  </c-col>
-                  <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link">
-                      Forgot password?
+                    <button cButton class="px-4" color="dark" (click)="login()" [disabled]="loading">
+               
+                    <span *ngIf="loading"> <c-spinner color="light" size="sm" ></c-spinner> </span>  Se
+                      connecter
                     </button>
                   </c-col>
                 </c-row>
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
+          <c-card [ngStyle]="{ 'width.%': 44 }" class="text-white bg-dark py-5">
             <c-card-body class="text-center">
               <div>
-                <h2>Sign up</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
-                  Register Now!
+                <h2>Inscription</h2>
+                <p>Si vous n'avez pas encore de compte</p>
+                <button
+                  [active]="true"
+                  cButton
+                  class="mt-3"
+                  color="dark"
+                  routerLink="/register"
+                >
+                  Inscrivez-vous
                 </button>
               </div>
             </c-card-body>

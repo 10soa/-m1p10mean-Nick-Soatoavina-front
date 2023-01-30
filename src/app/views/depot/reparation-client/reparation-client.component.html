@@ -1,0 +1,57 @@
+<div class="bg-light min-vh-100 d-flex flex-row">
+    <c-container>
+        <c-row>
+            <c-card>
+                <c-card-body>
+                    <h4 style="text-align: center;">Liste des reparations en cours</h4>
+                    <br>
+                    <table cTable>
+                        <thead>
+                        <tr>
+                        <th scope="col">Modele</th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Type voiture</th>
+                        <th scope="col">Date déposition</th>
+                        <th scope="col">Réparation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let vt of listeVt; index as i">
+                                <th>{{ vt.modele }}</th>
+                                <td>{{ vt.marque }}</td>
+                                <td>{{ vt.numero }}</td>
+                                <td>{{ vt.type_voiture }}</td>
+                                <td>{{ vt.reparation.date_deposition }}</td>
+                                <td>
+                                  <tr>
+                                      <th></th>
+                                  </tr>
+                                  <tr *ngFor="let lr of vt.reparation.liste_reparation; index as ii">
+                                    <td *ngIf="lr.avancement>=0 && lr.avancement<25">{{lr.reparation}} : <strong style="color:red">{{lr.avancement}}%</strong></td>
+                                    <td *ngIf="lr.avancement>=25 && lr.avancement<50">{{lr.reparation}} : <strong style="color:rgb(161, 16, 16)">{{lr.avancement}}%</strong></td>
+                                    <td *ngIf="lr.avancement>=50 && lr.avancement<80">{{lr.reparation}} : <strong style="color:rgb(241, 168, 10)">{{lr.avancement}}%</strong></td>
+                                    <td *ngIf="lr.avancement>=80 && lr.avancement<=100">{{lr.reparation}} : <strong style="color:rgb(8, 197, 40)">{{lr.avancement}}%</strong></td>
+                                  </tr>
+                                  
+                                </td>
+                              </tr>
+                        </tbody>
+                        </table>
+                        <c-pagination aria-label="Page navigation example"
+                            *ngIf="count!==0"
+                        >
+                          <c-page-item
+                            *ngFor="let n of nb; index as i">
+                            <a
+                              class="cursor"
+                              cPageLink
+                              >{{ i + 1 }}</a
+                            >
+                          </c-page-item>
+                        </c-pagination>
+                </c-card-body>
+            </c-card>    
+        </c-row>
+    </c-container>
+</div>

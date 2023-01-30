@@ -1,0 +1,169 @@
+<c-row>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Demande de proforma</strong>
+        <button cButton type="submit" style="float: right" (click)="demandeProforma()">
+          Envoyer la demande
+        </button>
+      </c-card-header>
+      <c-card-body>
+        <form cForm class="row g-3">
+          <c-col md="12">
+            <ng-container *ngTemplateOutlet="voiture"></ng-container>
+            <label cLabel for="inputState">Choisissez votre voiture</label>
+            <select
+              cSelect
+              id="inputState"
+              #teams
+              (change)="onSelected(teams.value)"
+            >
+              <option>...</option>
+              <option
+                *ngFor="let voiture of listeVoiture; let i = index"
+                value="{{ i }}"
+              >
+                {{ voiture.numero }}
+              </option>
+              <option value="-1">Ajouter une nouvelle voiture</option>
+            </select>
+          </c-col>
+          <c-col md="12">
+            <label cLabel for="inputAddress2">Reparation </label>
+            <c-row>
+            <c-col *ngFor="let reparation of reparations; index as i" lg="4">
+              <c-card *ngIf="reparation.reparation !== ''" cBorder="{top: {color: 'dark', width: 3}}" textColor="dark" class="mb-3">
+                <c-card-header>Reparation</c-card-header>
+                <c-card-body>
+                  <h5 cCardTitle>{{reparation.reparation}}</h5>
+                  <p cCardText>
+                    {{reparation.prix}} AR ( Prix de base )
+                  </p>
+                  <button color="dark" (click)="supprimerReparation(i)" cButton>Supprimer cette reparation</button>
+                </c-card-body>
+              </c-card>
+            </c-col> </c-row> <div class="d-grid gap-2">
+            
+            <button
+      cButton
+      (click)="toggleLiveDemo()"
+      color="secondary"
+      [disabled]="rep"
+    >
+      <svg cIcon name="cilPlus"></svg>
+    </button></div>
+            <ng-container *ngTemplateOutlet="verticallyCentered"></ng-container>
+          </c-col>
+          <c-col xs="12">  <c-alert
+            #alertWithButtonCloseTemplate="cAlert"
+            [dismissible]="dismissible"
+            [visible]="visibleError"
+            (visibleChange)="onAlertVisibleChange($event)"
+            color="danger"
+            fade
+            style="text-align: center;"
+          >
+            <ng-template
+              [ngIf]="alertWithButtonCloseTemplate.dismissible"
+              cTemplateId="alertButtonCloseTemplate"
+            >
+              <button
+                (click)="visibleError = false"
+                cButtonClose
+                white
+              ></button>
+            </ng-template>
+            {{ error }}
+          </c-alert> </c-col>
+        </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<c-row>
+  
+</c-row>
+<ng-template #verticallyCentered>
+
+  <c-modal
+    #verticallyCenteredModal
+    alignment="center"
+    id="verticallyCenteredModal"
+    [visible]="liveDemoVisible"
+    (visibleChange)="handleLiveDemoChange($event)"
+  >
+    <c-modal-header>
+      <h5 cModalTitle>Ajout d'une reparation</h5>
+      <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <label cLabel for="inputState">Reparation</label>
+      <select cSelect id="inputState"  #rep (change)="repSelected(rep.value)">
+        <option>...</option>
+        <option
+          *ngFor="let rep of listeReparation; let i = index"
+          value="{{ i }}"
+        >
+          {{ rep.reparation}}
+        </option>
+      </select>
+    </c-modal-body>
+    <c-modal-footer>
+      <button
+        [cModalToggle]="verticallyCenteredModal.id"
+        cButton
+        color="secondary"
+      >
+        Fermer
+      </button>
+      <button cButton color="primary" (click)="addReparation()">Ajouter</button>
+    </c-modal-footer>
+  </c-modal>
+</ng-template>
+
+<ng-template #voiture>
+  <c-modal
+    #voitureModal
+    alignment="center"
+    id="voitureModal"
+    alignment="center"
+    [visible]="voitureVisible"
+    (visibleChange)="handleVoitureChange($event)"
+    size="lg"
+  >
+    <c-modal-header>
+      <h5 cModalTitle>Ajout d'une voiture</h5>
+      <button [cModalToggle]="voitureModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <form cForm [formGroup]="form" class="row g-3">
+        <c-col md="6">
+          <label cLabel for="inputEmail4">Marque</label>
+          <input cFormControl type="text"  formControlName="marque"/>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputPassword4">Modele</label>
+          <input cFormControl type="text" formControlName="modele"/>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputEmail">Numero</label>
+          <input cFormControl type="text" formControlName="numero"/>
+        </c-col>
+        <c-col md="6">
+          <label cLabel for="inputPassword">Type de voiture</label>
+          <select cSelect id="select" #type (change)="typeSelected(type.value)">
+            <option *ngFor="let type of listeTypeVoiture" value="{{ type }}">
+              {{ type }}
+            </option>
+          </select>
+        </c-col>
+      </form>
+    </c-modal-body>
+    <c-modal-footer>
+      <button cButton color="secondary" [cModalToggle]="voitureModal.id">
+        Fermer
+      </button>
+      <button cButton color="primary" (click)="addVoiture()">Ajouter</button>
+    </c-modal-footer>
+  </c-modal></ng-template
+>

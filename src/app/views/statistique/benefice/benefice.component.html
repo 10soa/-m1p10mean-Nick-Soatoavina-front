@@ -1,0 +1,75 @@
+<div *ngIf="!ready">
+  <c-spinner color="dark"></c-spinner>
+</div>
+<div class="bg-light min-vh-100 d-flex flex-row" *ngIf="ready === true">
+  <c-container>
+    <c-row>
+      <c-callout class="bg-white">
+        <c-row>
+          <c-col lg="3"></c-col>
+          <c-col lg="6" xs="12">
+            <c-widget-stat-f
+              title="Temps de reparation moyen pour une voiture"
+              class="mb-3"
+              color="danger"
+              padding
+              [value]="tempsMoyen"
+            >
+              <ng-template cTemplateId="widgetIconTemplate">
+                <svg cIcon name="cilCarAlt" size="3xl"></svg>
+              </ng-template>
+            </c-widget-stat-f>
+          </c-col>
+        </c-row>
+      </c-callout>
+    </c-row>
+    <c-row>
+      <c-card>
+        <c-card-body>
+          <h4 style="text-align: center">Benefice par mois</h4>
+          <br />
+          <c-row>
+            <c-col md="4"></c-col>
+            <c-col md="2">
+              <label cLabel for="inputState">Année</label>
+              <select
+                cSelect
+                id="inputState"
+                #teams
+                (change)="onSelected(teams.value)"
+              >
+                <option
+                  *ngFor="let Annee of listeAnnee; let i = index"
+                  value="{{ Annee }}"
+                >
+                  {{ Annee }}
+                </option>
+              </select>
+            </c-col>
+            <c-col md="2"
+              ><button
+                class="bt"
+                cButton
+                type="submit"
+                color="danger"
+                (click)="getBenefice(annee)"
+              >
+                Rechercher
+              </button></c-col
+            ><c-col md="2"></c-col
+          ></c-row>
+          <br />
+          <c-row
+            ><c-col lg="2"></c-col
+            ><c-col lg="8"
+              ><c-chart
+                [data]="dataBenefice"
+                [options]="option"
+                type="line"
+              ></c-chart></c-col
+          ></c-row>
+        </c-card-body>
+      </c-card>
+    </c-row>
+  </c-container>
+</div>
