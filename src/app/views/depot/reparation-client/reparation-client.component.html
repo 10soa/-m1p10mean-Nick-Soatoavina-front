@@ -13,7 +13,7 @@
                         <th scope="col">Numero</th>
                         <th scope="col">Type voiture</th>
                         <th scope="col">Date déposition</th>
-                        <th scope="col"></th>
+                        <th scope="col">Réparation</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,10 +23,11 @@
                                 <td>{{ vt.numero }}</td>
                                 <td>{{ vt.type_voiture }}</td>
                                 <td>{{ vt.reparation.date_deposition }}</td>
-                                <td>
-                                  <button cButton color="info" size="sm" (click)="detail(i)">
-                                    Avancement <svg cIcon name="cil-chevron-right"></svg> 
-                                  </button>
+                                <td *ngFor="let lr of vt.reparation.liste_reparation; index as ii">
+                                  <tr *ngIf="lr.avancement>=0 && lr.avancement<25">{{lr.reparation}} : <strong style="color:red">{{lr.avancement}}%</strong></tr>
+                                  <tr *ngIf="lr.avancement>=25 && lr.avancement<50">{{lr.reparation}} : <strong style="color:rgb(161, 16, 16)">{{lr.avancement}}%</strong></tr>
+                                  <tr *ngIf="lr.avancement>=50 && lr.avancement<80">{{lr.reparation}} : <strong style="color:rgb(241, 168, 10)">{{lr.avancement}}%</strong></tr>
+                                  <tr *ngIf="lr.avancement>=80 && lr.avancement<=100">{{lr.reparation}} : <strong style="color:rgb(8, 197, 40)">{{lr.avancement}}%</strong></tr>
                                 </td>
                               </tr>
                         </tbody>
@@ -48,36 +49,3 @@
         </c-row>
     </c-container>
 </div>
-
-<c-modal
-    #verticallyCenteredModal
-    alignment="center"
-    id="verticallyCenteredModal"
-    [visible]="liveDemoVisible"
-    (visibleChange)="handleLiveDemoChange($event)"
-    size="lg"
-  >
-    <c-modal-header>
-      <h5 cModalTitle>Avancement</h5>
-    </c-modal-header>
-    <c-modal-body>
-        <c-row>
-            <c-col md="3" xl="4" *ngFor="let lr of listeRep.liste_reparation; index as ii">
-            <c-widget-stat-b>
-            <c-progress class="my-1" thin>
-                <c-progress-bar [value]="lr.avancement" color="warning"></c-progress-bar>
-            </c-progress>
-            <p>{{lr.reparation}} : {{lr.avancement}}%</p>
-            <p><strong>{{lr.prix}} Ar</strong></p>
-            </c-widget-stat-b>
-            </c-col>
-        </c-row>
-    </c-modal-body>
-    <c-modal-footer>
-      <button
-        [cModalToggle]="verticallyCenteredModal.id"
-        cButton
-        color="secondary"
-      ><svg cIcon name="cil-arrow-circle-left"></svg> </button>
-    </c-modal-footer>
-  </c-modal>
