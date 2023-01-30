@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VoitureDeposerComponent {
 
-  public off!:number;
+  public off:number=0;
   index = 0;
   public liveDemoVisible = false;
   loading = false;
@@ -49,9 +49,6 @@ export class VoitureDeposerComponent {
 
   ngOnInit() {
     this.countListe();
-    this.route.params.subscribe(params => {
-      this.off=params['off'];
-    });
     this.listeVoitureDeposer(this.off);
   }
 

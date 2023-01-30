@@ -28,7 +28,7 @@ export class CrudReparationComponent implements OnInit{
   count!: Number;
   submitted = false;
   submittedModifier = false;
-  public off!:number;
+  public off:number = 0;
   public lim!:Number;
   public nb!: number[];
   public liveDemoVisibleModification = false;
@@ -48,9 +48,6 @@ export class CrudReparationComponent implements OnInit{
 
   ngOnInit() {
     this.countListe();
-    this.route.params.subscribe(params => {
-      this.off=params['off'];
-    });
     this.listeReparation(this.off);
     this.form1 = this.formBuilder.group({
       reparation: ['', Validators.required],
@@ -69,7 +66,13 @@ export class CrudReparationComponent implements OnInit{
       (response :any)=>{
         this.liste=response.data;
       },
-      (err)=>{console.log(err);}
+      (err)=>{console.log(err);
+        this.liste=[{
+          _id:'',
+          reparation:'',
+          montant :0,
+          type_voiture :''
+        }];}
     );
   }
 

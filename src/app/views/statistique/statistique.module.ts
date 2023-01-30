@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import {  AlertModule, ButtonGroupModule, ButtonModule, CalloutModule, CardModule, DropdownModule, FormModule, GridModule, ListGroupModule, ModalModule, NavModule, PaginationModule, SharedModule, SpinnerModule, TableModule, TabsModule, WidgetModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormsRoutingModule } from '../forms/forms-routing.module';
+// import { FormsRoutingModule } from '../forms/forms-routing.module';
 import { StatistiqueRoutingModule } from '../statistique/statistique-routing.module';
 import { ChartjsModule } from '@coreui/angular-chartjs';
-import { ChartsModule } from '../charts/charts.module';
+// import { ChartsModule } from '../charts/charts.module';
 import { ChiffreAffaireComponent } from './chiffre-affaire/chiffre-affaire.component';
 import { BeneficeComponent } from './benefice/benefice.component';
 
@@ -33,7 +33,7 @@ import { BeneficeComponent } from './benefice/benefice.component';
     ListGroupModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsRoutingModule,
+    // FormsRoutingModule,
     IconModule,
     ModalModule,
     AlertModule,
@@ -43,7 +43,7 @@ import { BeneficeComponent } from './benefice/benefice.component';
     SpinnerModule,
     StatistiqueRoutingModule,
     ChartjsModule,
-    ChartsModule,
+    // ChartsModule,
     TabsModule,
     NavModule,
     WidgetModule,

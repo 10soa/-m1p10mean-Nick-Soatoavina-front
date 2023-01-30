@@ -20,7 +20,7 @@ export class ReparationComponent implements OnInit{
   visibleError = false;
   count!: Number;
   submitted = false;
-  public off!:number;
+  public off:number = 0;
   public lim!:Number;
   public nb!: number[];
   public avance!:number;
@@ -60,9 +60,6 @@ export class ReparationComponent implements OnInit{
 
   ngOnInit() {
     this.countListe();
-    this.route.params.subscribe(params => {
-      this.off=params['off'];
-    });
     this.listeVoiture(this.off);
     this.form = this.formBuilder.group({
       taux: ['', Validators.required]

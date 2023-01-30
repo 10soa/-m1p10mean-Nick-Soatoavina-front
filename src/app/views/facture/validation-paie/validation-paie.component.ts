@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ValidationPaieComponent {
 
-  public off!:number;
+  public off:number=0;
   public nomClient!:string;
   index = 0;
   public liveDemoVisible = false;
@@ -78,9 +78,6 @@ export class ValidationPaieComponent {
 
   ngOnInit() {
     this.countListe();
-    this.route.params.subscribe(params => {
-      this.off=params['off'];
-    });
     this.listePaiementNV(this.off);
   }
 

@@ -7,7 +7,6 @@ import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProformaRoutingModule } from './proforma-routing.module';
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
-import { FormsRoutingModule } from '../forms/forms-routing.module';
 import { ListeProformaComponent } from './liste-proforma/liste-proforma.component';
 import { ProformaClientComponent } from './proforma-client/proforma-client.component'
 

@@ -20,7 +20,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'validationPaie/:off',
+    path: 'validationPaie',
     component: ValidationPaieComponent,
     data: {
       title: "Validation Paiement"

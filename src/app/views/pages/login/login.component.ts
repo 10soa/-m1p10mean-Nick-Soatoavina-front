@@ -45,11 +45,24 @@ export class LoginComponent  implements OnInit {
     console.log( this.f['username'].value,this.f['password'].value);
     
     if(  this.f['username'].value !== '' &&  this.f['password'].value !==''){
-      this.loading = true;
-    this.http.post(api('login'),{ nom: this.f['username'].value, mdp:this.f['password'].value}).subscribe((result: any) => {
-    localStorage.setItem('type_user',result.type_user);
-    localStorage.setItem('utilisateur',JSON.stringify(result.utilisateur));
-    this.router.navigateByUrl('/dashboard');
+      this.http.post(api('login'),{ nom: this.f['username'].value, mdp:this.f['password'].value}).subscribe((result: any) => {
+      localStorage.setItem('type_user',result.type_user);
+      localStorage.setItem('utilisateur',JSON.stringify(result.utilisateur));
+      if(localStorage.getItem('utilisateur')){
+        console.log(localStorage.getItem('utilisateur'),"biz");
+        if(result.type_user.toLowerCase() === 'client'){ 
+         window.location.href='/proforma/demande';
+        }
+        else if(result.type_user.toLowerCase() === 'atelier'){
+         window.location.href='/depotVoiture/liste';
+        }
+        else{
+         window.location.href='/facture/validationPaie';
+          
+        }
+        this.loading = true;
+      }
+      
     }, error => {
       this.visibleError = true;
       this.error = error.error.message;

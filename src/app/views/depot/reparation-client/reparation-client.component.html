@@ -23,11 +23,17 @@
                                 <td>{{ vt.numero }}</td>
                                 <td>{{ vt.type_voiture }}</td>
                                 <td>{{ vt.reparation.date_deposition }}</td>
-                                <td *ngFor="let lr of vt.reparation.liste_reparation; index as ii">
-                                  <tr *ngIf="lr.avancement>=0 && lr.avancement<25">{{lr.reparation}} : <strong style="color:red">{{lr.avancement}}%</strong></tr>
-                                  <tr *ngIf="lr.avancement>=25 && lr.avancement<50">{{lr.reparation}} : <strong style="color:rgb(161, 16, 16)">{{lr.avancement}}%</strong></tr>
-                                  <tr *ngIf="lr.avancement>=50 && lr.avancement<80">{{lr.reparation}} : <strong style="color:rgb(241, 168, 10)">{{lr.avancement}}%</strong></tr>
-                                  <tr *ngIf="lr.avancement>=80 && lr.avancement<=100">{{lr.reparation}} : <strong style="color:rgb(8, 197, 40)">{{lr.avancement}}%</strong></tr>
+                                <td>
+                                  <tr>
+                                      <th></th>
+                                  </tr>
+                                  <tr *ngFor="let lr of vt.reparation.liste_reparation; index as ii">
+                                    <td *ngIf="lr.avancement>=0 && lr.avancement<25">{{lr.reparation}} : <strong style="color:red">{{lr.avancement}}%</strong></td>
+                                    <td *ngIf="lr.avancement>=25 && lr.avancement<50">{{lr.reparation}} : <strong style="color:rgb(161, 16, 16)">{{lr.avancement}}%</strong></td>
+                                    <td *ngIf="lr.avancement>=50 && lr.avancement<80">{{lr.reparation}} : <strong style="color:rgb(241, 168, 10)">{{lr.avancement}}%</strong></td>
+                                    <td *ngIf="lr.avancement>=80 && lr.avancement<=100">{{lr.reparation}} : <strong style="color:rgb(8, 197, 40)">{{lr.avancement}}%</strong></td>
+                                  </tr>
+                                  
                                 </td>
                               </tr>
                         </tbody>
