@@ -51,13 +51,13 @@ export class LoginComponent  implements OnInit {
       if(localStorage.getItem('utilisateur')){
         console.log(localStorage.getItem('utilisateur'),"biz");
         if(result.type_user.toLowerCase() === 'client'){ 
-         window.location.href='/proforma/demande';
+          this.router.navigateByUrl('/proforma/demande');
         }
         else if(result.type_user.toLowerCase() === 'atelier'){
-         window.location.href='/depotVoiture/liste';
+          this.router.navigateByUrl('/depotVoiture/liste');
         }
         else{
-         window.location.href='/facture/validationPaie';
+          this.router.navigateByUrl('/facture/validationPaie');
           
         }
         this.loading = true;
