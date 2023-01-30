@@ -56,7 +56,7 @@ export class BonSortieComponent {
   }
 
   listeVtRecuperer(){
-    var url="http://localhost/Mean_projet/Voiture/voitureRecupere";
+    var url=api("Voiture/voitureRecupere");
     this.http.get(url).subscribe(
       (response :any)=>{
         var data=response.data;
@@ -73,7 +73,7 @@ export class BonSortieComponent {
   }
 
   modifier(mq:string,mod:string,num:string,tp:string,clientID:string,dateD:string,dateR:string){
-    this.http.put('http://localhost/Mean_projet/Voiture/validationBD',
+    this.http.put(api('Voiture/validationBD'),
     { 
       marque: mq,
       modele: mod,

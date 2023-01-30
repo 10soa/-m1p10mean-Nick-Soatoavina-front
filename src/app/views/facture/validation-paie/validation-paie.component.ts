@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import api from 'src/app/const/api';
 
 @Component({
   selector: 'app-validation-paie',
@@ -82,7 +83,7 @@ export class ValidationPaieComponent {
   }
 
   countListe(){
-    var url="http://localhost/Mean_projet/Voiture/countlistePaiementNV";
+    var url=api("Voiture/countlistePaiementNV");
     this.http.get(url).subscribe(
       (response :any)=>{
         var value=Number.parseInt(response.result);
@@ -104,7 +105,7 @@ export class ValidationPaieComponent {
   }
 
   listePaiementNV(off:number){
-    var url="http://localhost/Mean_projet/Voiture/listePaiementNV/"+(off*5)+"/5";
+    var url=api("Voiture/listePaiementNV/"+(off*5)+"/5");
     this.http.get(url).subscribe(
       (response :any)=>{
         this.liste=response.result;
@@ -130,8 +131,8 @@ export class ValidationPaieComponent {
   }
 
   validerPaiement(mq:string,mod:string,num:string,tp:string,clientID:number,dateD:Date,dateP:Date,paye:number,montP:number,index:number){
-    this.http.put('http://localhost/Mean_projet/Voiture/validationPaiement',
-    { 
+    this.http.put(api('Voiture/validationPaiement'),
+  { 
       marque: mq,
       modele:mod,
       numero:num,

@@ -61,7 +61,7 @@ export class CrudReparationComponent implements OnInit{
   }
 
   listeReparation(off:number){
-    var url="http://localhost/Mean_projet/Reparation/"+(off*5)+"/5";
+    var url=api("Reparation/"+(off*5)+"/5");
     this.http.get(url).subscribe(
       (response :any)=>{
         this.liste=response.data;
@@ -85,7 +85,7 @@ export class CrudReparationComponent implements OnInit{
   }
 
   countListe(){
-    var url="http://localhost/Mean_projet/Reparation/countReparation";
+    var url=api("Reparation/countReparation");
     this.http.get(url).subscribe(
       (response :any)=>{
         var value=Number.parseInt(response.data);
@@ -118,7 +118,7 @@ export class CrudReparationComponent implements OnInit{
   }
 
   suppression(id:string){
-    this.http.delete('http://localhost/Mean_projet/Reparation/'+id,
+    this.http.delete(api('Reparation/'+id),
     { 
     }).subscribe((result: any) => {
       this.countListe();
@@ -143,7 +143,7 @@ export class CrudReparationComponent implements OnInit{
   modifierReparation(id:string){
     
     //console.log(this.f1['reparation'].value,"//",mont,"//",tp);
-    this.http.put('http://localhost/Mean_projet/Reparation/'+id,
+    this.http.put(api('Reparation/'+id),
     { 
       reparation: this.f1['reparation'].value,
       montant : this.f1['montant'].value,
@@ -191,7 +191,7 @@ export class CrudReparationComponent implements OnInit{
     }
     var rep=this.f['reparation'].value;
     var prix=this.f['montant'].value;
-    this.http.post('http://localhost/Mean_projet/Reparation',
+    this.http.post(api('Reparation'),
     { 
       reparation: rep,
       montant :prix,

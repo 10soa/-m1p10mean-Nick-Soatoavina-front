@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as internal from 'stream';
 import { RegisterComponent } from '../register/register.component';
+import api from 'src/app/const/api';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class VerificationComponent implements OnInit{
   constructor(private http: HttpClient,private route: ActivatedRoute,private router: Router) { }
 
   clientInscription(nom:string,prenom:string,mail:string){
-    var url="http://localhost/Mean_projet/Client/clientInscription/"+nom+"/"+prenom+"/"+mail;
+    var url=api("Client/clientInscription/"+nom+"/"+prenom+"/"+mail);
     return this.http.get(url);
     
   }
@@ -32,7 +33,7 @@ export class VerificationComponent implements OnInit{
       this.prenom=params['prenom'];
       this.mail=params['mail'];
       //console.log("lc"+localStorage.getItem("utilisateur"));
-      this.http.post('http://localhost/Mean_projet/Client/validationCompte',
+      this.http.post(api('Client/validationCompte'),
       { 
         nom: this.nom,
         prenom: this.prenom,

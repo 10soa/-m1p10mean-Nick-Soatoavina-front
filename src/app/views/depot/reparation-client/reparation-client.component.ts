@@ -52,7 +52,7 @@ export class ReparationClientComponent implements OnInit{
   }
 
   listeVoiture(){
-    var url="http://localhost/Mean_projet/Voiture/reparationAvancementClient/"+this.client.client_id;
+    var url=api("Voiture/reparationAvancementClient/"+this.client.client_id);
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeVt=response.result;

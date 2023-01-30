@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as internal from 'stream';
+import api from 'src/app/const/api';
 
 @Component({
   selector: 'app-proforma-client',
@@ -55,7 +56,7 @@ export class ProformaClientComponent {
   }
 
   listeEnCours(clientID:number){
-    var url="http://localhost/Mean_projet/Proforma/listeProformaClient1EnCours/"+clientID;
+    var url=api("Proforma/listeProformaClient1EnCours/"+clientID);
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeE=response.data;
@@ -65,7 +66,7 @@ export class ProformaClientComponent {
   }
 
   listeValide(clientID:number){
-    var url="http://localhost/Mean_projet/Proforma/listeProformatClient1Valide/"+clientID;
+    var url=api("Proforma/listeProformatClient1Valide/"+clientID);
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeV=response.data;
@@ -75,7 +76,7 @@ export class ProformaClientComponent {
   }
 
   depotVoiture(i:number,marque:string,modele:string,numero:string,type:string){
-    this.http.post('http://localhost/Mean_projet/Voiture/'+modele+'/'+marque+'/'+numero+'/'+type+'/'+this.client.client_id,
+    this.http.post(api('Voiture/'+modele+'/'+marque+'/'+numero+'/'+type+'/'+this.client.client_id),
     { 
         reparation : {
           montant_total : this.listeV[i].montant_total,

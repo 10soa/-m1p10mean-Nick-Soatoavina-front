@@ -67,7 +67,7 @@ export class ReparationComponent implements OnInit{
   }
 
   countListe(){
-    var url="http://localhost/Mean_projet/Voiture/countreparationAvecAvancement";
+    var url=api("Voiture/countreparationAvecAvancement");
     this.http.get(url).subscribe(
       (response :any)=>{
         var value=Number.parseInt(response.result);
@@ -89,7 +89,7 @@ export class ReparationComponent implements OnInit{
   }
 
   listeVoiture(off:number){
-    var url="http://localhost/Mean_projet/Voiture/reparationAvecAvancement/"+(off*5)+"/5";
+    var url=api("Voiture/reparationAvecAvancement/"+(off*5)+"/5");
     this.http.get(url).subscribe(
       (response :any)=>{
         this.listeVt=response.result;
@@ -121,7 +121,7 @@ export class ReparationComponent implements OnInit{
       this.visibleError=true;
       this.submitted=false;
     }else{
-      this.http.put('http://localhost/Mean_projet/Voiture/modificationAvancement/'+this.mq+'/'+this.mod+'/'+this.num+'/'+this.type+'/'+this.client_id+'/'+date+'/'+nomRep+'/'+this.avance,
+      this.http.put(api('Voiture/modificationAvancement/'+this.mq+'/'+this.mod+'/'+this.num+'/'+this.type+'/'+this.client_id+'/'+date+'/'+nomRep+'/'+this.avance),
     { 
       
     }).subscribe((result: any) => {

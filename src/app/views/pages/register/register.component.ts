@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import api from 'src/app/const/api';
 
 @Component({
   selector: 'app-register',
@@ -49,7 +50,7 @@ export class RegisterComponent  implements OnInit {
     }
     this.loading = true;
     
-    this.http.post('http://localhost/Mean_projet/Client/inscriptionClient',
+    this.http.post(api('Client/inscriptionClient'),
     { 
       nom: this.f['nom'].value,
       prenom: this.f['prenom'].value,

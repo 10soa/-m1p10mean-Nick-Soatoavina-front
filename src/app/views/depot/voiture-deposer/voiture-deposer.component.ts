@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import api from 'src/app/const/api';
 
 @Component({
   selector: 'app-voiture-deposer',
@@ -53,7 +54,7 @@ export class VoitureDeposerComponent {
   }
 
   listeVoitureDeposer(off:number){
-    var url="http://localhost/Mean_projet/Voiture/listeVoitureDeposer/"+(off*5)+"/5";
+    var url=api("Voiture/listeVoitureDeposer/"+(off*5)+"/5");
     this.http.get(url).subscribe(
       (response :any)=>{
         this.liste=response.result;
@@ -64,7 +65,7 @@ export class VoitureDeposerComponent {
   }
 
   countListe(){
-    var url="http://localhost/Mean_projet/Voiture/countListeVoitureDeposer";
+    var url=api("Voiture/countListeVoitureDeposer");
     this.http.get(url).subscribe(
       (response :any)=>{
         var value=Number.parseInt(response.result);
@@ -86,7 +87,7 @@ export class VoitureDeposerComponent {
   }
 
   detail(id:number,date:Date){
-    var url="http://localhost/Mean_projet/Voiture/listeReparationVoiture1/"+id+"/"+date;
+    var url=api("Voiture/listeReparationVoiture1/"+id+"/"+date);
     this.http.get(url).subscribe(
       (response :any)=>{
         this.reparation=response.result;
@@ -107,7 +108,7 @@ export class VoitureDeposerComponent {
   }
 
   validerReception(id:string,date:Date){
-    this.http.post('http://localhost/Mean_projet/Voiture/receptionVoiture/'+id+'/'+date,
+    this.http.post(api('Voiture/receptionVoiture/'+id+'/'+date),
     { 
       
     }).subscribe((result: any) => {
